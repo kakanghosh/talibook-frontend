@@ -1,3 +1,3 @@
 export const APP = {
-  name: 'Room Chaai',
+  name: 'TaliBook',
 };
