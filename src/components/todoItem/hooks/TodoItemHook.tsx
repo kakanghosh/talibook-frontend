@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { deleteTodoAsync } from '../store/slices/todoListSlice';
+import { deleteTodoAsync } from '../../../store/slices/todoListSlice';
 
 function useTodoAction(todo) {
   const dispatch = useDispatch();

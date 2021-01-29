@@ -1,8 +1,7 @@
-import React from 'react';
-import LandingPage from '../features/landingPage/LandingPage';
+import DashBoardView from '../features/dashboardView/DashBoardView';
 
 function Index() {
-  return <LandingPage />;
+  return <DashBoardView></DashBoardView>;
 }
 
 export default Index;

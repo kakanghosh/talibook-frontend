@@ -1,6 +1,8 @@
+import { useToast } from '@chakra-ui/react';
 import { useFormik } from 'formik';
 import { useState } from 'react';
 import { SchemaOf, object, string } from 'yup';
+import { useAuth } from '../../../contexts/auth';
 
 type LoginData = {
   email: string;
@@ -16,7 +18,10 @@ const validationSchema: SchemaOf<LoginData> = object({
 });
 
 function useLoginForm() {
+  const { login, setUser } = useAuth();
   const [showPlainPassword, setShowPlainPassword] = useState(false);
+  const [loginFailed, setLoginFailed] = useState(false);
+  const toast = useToast();
 
   const loginForm = useFormik<LoginData>({
     initialValues: {
@@ -24,8 +29,20 @@ function useLoginForm() {
       password: '',
     },
     validationSchema,
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: async (values) => {
+      try {
+        setLoginFailed(false);
+        const user = await login(values.email, values.password);
+        showToast();
+        setTimeout(() => {
+          setUser(user);
+          window.location.pathname = '/';
+        }, 2000);
+      } catch ({ response }) {
+        if (response.status == 401) {
+          setLoginFailed(true);
+        }
+      }
     },
   });
 
@@ -38,7 +55,23 @@ function useLoginForm() {
   const isFormValid =
     Object.keys(errors).length > 0 || Object.keys(touched).length == 0;
 
-  return { showPlainPassword, loginForm, isFormValid, updateShowPlainPassword };
+  const showToast = () =>
+    toast({
+      title: 'Login Successful.',
+      description: "We're redirecting you to the Dashboard.",
+      status: 'success',
+      duration: 9000,
+      isClosable: true,
+      position: 'bottom-right',
+    });
+
+  return {
+    showPlainPassword,
+    loginForm,
+    isFormValid,
+    loginFailed,
+    updateShowPlainPassword,
+  };
 }
 
 export default useLoginForm;

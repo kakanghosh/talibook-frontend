@@ -1,9 +1,12 @@
 import React from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToTodoList, selectTodoList } from '../store/slices/todoListSlice';
-import TodoItem from '../components/todoItem/TodoItem';
-import { Todo } from '../models';
+import {
+  addToTodoList,
+  selectTodoList,
+} from '../../../store/slices/todoListSlice';
+import TodoItem from '../../../components/todoItem/TodoItem';
+import { Todo } from '../../../models';
 
 function getMappedTodos(todos: Todo[]) {
   return todos.map((todo) => <TodoItem key={todo.id} todo={todo} />);

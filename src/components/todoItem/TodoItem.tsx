@@ -1,5 +1,5 @@
 import React from 'react';
-import useTodoAction from '../../hooks/TodoItemHook';
+import useTodoAction from './hooks/TodoItemHook';
 import style from './Todo.module.scss';
 
 const TodoItem = ({ todo }) => {

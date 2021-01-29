@@ -1,11 +1,14 @@
 import React from 'react';
 import {
+  Alert,
+  AlertIcon,
   Button,
   FormControl,
   FormLabel,
   Input,
   InputGroup,
   InputRightElement,
+  Stack,
 } from '@chakra-ui/react';
 import useLoginForm from './hooks/LoginFormHook';
 
@@ -14,6 +17,7 @@ function LoginForm() {
     showPlainPassword,
     loginForm,
     isFormValid,
+    loginFailed,
     updateShowPlainPassword,
   } = useLoginForm();
 
@@ -21,6 +25,14 @@ function LoginForm() {
 
   return (
     <div>
+      {loginFailed && (
+        <Stack spacing={3}>
+          <Alert status='error' textColor='black'>
+            <AlertIcon />
+            Email / Password is incorrect
+          </Alert>{' '}
+        </Stack>
+      )}
       <form onSubmit={handleSubmit} noValidate>
         <FormControl id='email'>
           <FormLabel>Email address</FormLabel>

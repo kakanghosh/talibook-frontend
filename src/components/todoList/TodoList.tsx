@@ -1,5 +1,5 @@
 import React from 'react';
-import useTodoList from '../../hooks/TodoListHook';
+import useTodoList from './hooks/TodoListHook';
 
 const TodoList = () => {
   const { todosMap, newTodo, todoText, setTodoText } = useTodoList('');

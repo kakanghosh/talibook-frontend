@@ -6,6 +6,7 @@ import './styles.css';
 import store from '../store/store';
 import { APP } from '../common/constants';
 import { ChakraProvider } from '@chakra-ui/react';
+import { AuthProvider, ProtectedRoute } from '../contexts/auth';
 
 function CustomApp({ Component, pageProps }: AppProps) {
   return (
@@ -16,9 +17,13 @@ function CustomApp({ Component, pageProps }: AppProps) {
       <div>
         <main>
           <Provider store={store}>
-            <ChakraProvider>
-              <Component {...pageProps} />
-            </ChakraProvider>
+            <AuthProvider>
+              <ChakraProvider>
+                <ProtectedRoute>
+                  <Component {...pageProps} />
+                </ProtectedRoute>
+              </ChakraProvider>
+            </AuthProvider>
           </Provider>
         </main>
       </div>

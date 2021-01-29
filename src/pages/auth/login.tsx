@@ -1,8 +1,9 @@
 import React from 'react';
 import LoginView from '../../features/loginView/LoginView';
+import { ProtectedRoute } from '../../contexts/auth';
 
-function LoginPage() {
+const LoginPage = () => {
   return <LoginView></LoginView>;
-}
+};
 
 export default LoginPage;
