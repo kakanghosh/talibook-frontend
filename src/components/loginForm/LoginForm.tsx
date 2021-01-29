@@ -9,7 +9,12 @@ import {
   InputGroup,
   InputRightElement,
   Stack,
+  Text,
+  Link,
+  Flex,
+  Box,
 } from '@chakra-ui/react';
+import NextLink from 'next/link';
 import useLoginForm from './hooks/LoginFormHook';
 
 function LoginForm() {
@@ -64,9 +69,27 @@ function LoginForm() {
             </InputRightElement>
           </InputGroup>
         </FormControl>
-        <Button mt={4} colorScheme='teal' type='submit' disabled={isFormValid}>
-          Login
-        </Button>
+        <Flex justifyContent='space-between' alignItems='flex-end'>
+          <Button
+            mt={4}
+            colorScheme='teal'
+            type='submit'
+            disabled={isFormValid}
+          >
+            Login
+          </Button>
+          <Text fontSize='md'>
+            <NextLink href={`/auth/create-account`}>
+              <Link
+                textColor='white'
+                color='teal.500'
+                href={`/auth/create-account`}
+              >
+                Create New Account
+              </Link>
+            </NextLink>
+          </Text>
+        </Flex>
       </form>
     </div>
   );

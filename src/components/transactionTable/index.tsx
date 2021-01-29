@@ -44,15 +44,15 @@ const TransactionTable = ({ distributorId, shopId }) => {
       <Flex justifyContent='flex-end'>
         <Box p='5px'>
           <Stat>
-            <StatLabel>Total Deposite</StatLabel>
-            <StatNumber>&#2547; {transaction.totalDeposite}</StatNumber>
+            <StatLabel>Total Purchase</StatLabel>
+            <StatNumber>&#2547; {transaction.totalPurchase}</StatNumber>
           </Stat>
         </Box>
         <Box p='5px'>-</Box>
         <Box p='5px'>
           <Stat>
-            <StatLabel>Total Purchase</StatLabel>
-            <StatNumber>&#2547; {transaction.totalPurchase}</StatNumber>
+            <StatLabel>Total Deposite</StatLabel>
+            <StatNumber>&#2547; {transaction.totalDeposite}</StatNumber>
           </Stat>
         </Box>
         <Box p='5px'>=</Box>

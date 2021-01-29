@@ -99,7 +99,11 @@ export const ProtectedRoute = ({ children }) => {
 
   if (isLoading) {
     return <Skeleton height={40} count={5} />;
-  } else if (!isAuthenticated && window.location.pathname != '/auth/login') {
+  } else if (
+    !isAuthenticated &&
+    window.location.pathname != '/auth/login' &&
+    window.location.pathname != '/auth/create-account'
+  ) {
     window.location.pathname = '/auth/login';
     return <Skeleton height={40} count={5} />;
   } else if (isAuthenticated && window.location.pathname == '/auth/login') {

@@ -7,6 +7,14 @@ export interface TodoListSliceState {
   value: Todo[];
 }
 
+export class User {
+  firstName: string;
+  lastName: string;
+  email: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export class Shop {
   id: number;
   name: string;
