@@ -1,48 +1,21 @@
-import { AddIcon } from '@chakra-ui/icons';
-import {
-  Table,
-  Thead,
-  Tr,
-  Th,
-  Tbody,
-  Td,
-  Text,
-  Link,
-  ButtonGroup,
-  Button,
-  IconButton,
-  Flex,
-  Spacer,
-  Badge,
-  Center,
-} from '@chakra-ui/react';
+import { Table, Thead, Tr, Th, Tbody, Td, Text, Link } from '@chakra-ui/react';
 import NextLink from 'next/link';
+import TitleAction from '../titleAction';
 import useShowDistributor from './hooks/ShowDistributorHook';
 
 const ShowDistributor = () => {
   const { distributors } = useShowDistributor();
+  const createDistributor = () => {
+    console.log('createDistributor');
+  };
   return (
     <>
-      <Flex p='5px'>
-        <Center>
-          <Badge variant='solid' colorScheme='green'>
-            <Text fontSize='md'>Distributors</Text>
-          </Badge>
-        </Center>
-        <Spacer></Spacer>
-        <ButtonGroup
-          size='sm'
-          isAttached
-          variant='outline'
-          colorScheme='green'
-          onClick={() => {
-            alert('You clicked');
-          }}
-        >
-          <Button mr='-px'>Create Distributor</Button>
-          <IconButton aria-label='Add to friends' icon={<AddIcon />} />
-        </ButtonGroup>
-      </Flex>
+      <TitleAction
+        title='Distributors'
+        value=''
+        actionTitle='Create Distributor'
+        clickHandler={createDistributor}
+      ></TitleAction>
       <Table size='sm' fontSize='xl'>
         <Thead>
           <Tr>

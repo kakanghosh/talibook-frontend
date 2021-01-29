@@ -1,4 +1,3 @@
-import { AddIcon } from '@chakra-ui/icons';
 import {
   Table,
   Thead,
@@ -7,21 +6,16 @@ import {
   Tbody,
   Td,
   Text,
-  Tag,
   Stat,
   StatLabel,
   StatNumber,
   Flex,
   Box,
   Spinner,
-  Center,
-  Badge,
-  Spacer,
-  ButtonGroup,
-  Button,
-  IconButton,
 } from '@chakra-ui/react';
+import Skeleton from 'react-loading-skeleton';
 import useFetchShop from '../showDistrubotrShops/hooks/shopHook';
+import TitleAction from '../titleAction';
 import useFetchTransaction from './hooks/fetchTransactionHook';
 
 const TransactionTable = ({ distributorId, shopId }) => {
@@ -31,46 +25,22 @@ const TransactionTable = ({ distributorId, shopId }) => {
   );
   const { shop } = useFetchShop(distributorId, shopId);
 
+  const addTransaction = () => {
+    console.log('addTransaction');
+  };
+
   if (!transaction || !shop) {
-    return (
-      <Spinner
-        thickness='4px'
-        speed='0.65s'
-        emptyColor='gray.200'
-        color='blue.500'
-        size='xl'
-      />
-    );
+    return <Skeleton height={40} count={5} />;
   }
 
   return (
     <>
-      <Flex p='5px' wrap='wrap'>
-        <Center p='3px'>
-          <Text textTransform='initial' fontSize='xl' m='3px'>
-            {' '}
-            Shop Name:
-          </Text>
-          <Badge variant='solid' colorScheme='green'>
-            <Text textTransform='initial' fontSize='md'>
-              {shop.name}
-            </Text>
-          </Badge>
-        </Center>
-        <Spacer></Spacer>
-        <ButtonGroup
-          size='sm'
-          isAttached
-          variant='outline'
-          colorScheme='green'
-          onClick={() => {
-            alert('You clicked');
-          }}
-        >
-          <Button mr='-px'>Add Transaction</Button>
-          <IconButton aria-label='Add to friends' icon={<AddIcon />} />
-        </ButtonGroup>
-      </Flex>
+      <TitleAction
+        title='Shop Name:'
+        value={shop.name}
+        actionTitle='Add Transaction'
+        clickHandler={addTransaction}
+      ></TitleAction>
       <Flex justifyContent='flex-end'>
         <Box p='5px'>
           <Stat>

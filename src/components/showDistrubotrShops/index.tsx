@@ -1,4 +1,3 @@
-import { AddIcon } from '@chakra-ui/icons';
 import {
   Table,
   Text,
@@ -8,63 +7,33 @@ import {
   Tbody,
   Td,
   Link,
-  Flex,
-  Center,
-  Badge,
-  Spacer,
-  ButtonGroup,
-  Button,
-  IconButton,
   Spinner,
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
+import Skeleton from 'react-loading-skeleton';
 import useFetchDistributor from '../showDistributor/hooks/DistributorHook';
+import TitleAction from '../titleAction';
 import useShowDistributorShops from './hooks/distributorShopsHook';
 
 const ShowDistributorShops = ({ distributorId }) => {
   const { shops } = useShowDistributorShops(distributorId);
   const { distributor } = useFetchDistributor(distributorId);
+  const createShop = () => {
+    console.log('Create Shop');
+  };
 
   if (!shops || !distributor) {
-    return (
-      <Spinner
-        thickness='4px'
-        speed='0.65s'
-        emptyColor='gray.200'
-        color='blue.500'
-        size='xl'
-      />
-    );
+    return <Skeleton height={40} count={5} />;
   }
 
   return (
     <>
-      <Flex p='5px' wrap='wrap'>
-        <Center p='3px'>
-          <Text textTransform='initial' fontSize='xl' m='3px'>
-            {' '}
-            Distributor Name:
-          </Text>
-          <Badge variant='solid' colorScheme='green'>
-            <Text textTransform='initial' fontSize='md'>
-              {distributor.name}
-            </Text>
-          </Badge>
-        </Center>
-        <Spacer></Spacer>
-        <ButtonGroup
-          size='sm'
-          isAttached
-          variant='outline'
-          colorScheme='green'
-          onClick={() => {
-            alert('You clicked');
-          }}
-        >
-          <Button mr='-px'>Create Shop</Button>
-          <IconButton aria-label='Add to friends' icon={<AddIcon />} />
-        </ButtonGroup>
-      </Flex>
+      <TitleAction
+        title='Distributor Name:'
+        value={distributor.name}
+        actionTitle='Create Shop'
+        clickHandler={createShop}
+      ></TitleAction>
 
       <Table size='sm' fontSize='xl'>
         <Thead>
