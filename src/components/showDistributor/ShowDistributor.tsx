@@ -1,12 +1,24 @@
-import { Table, Thead, Tr, Th, Tbody, Td, Text, Link } from '@chakra-ui/react';
+import {
+  Table,
+  Thead,
+  Tr,
+  Th,
+  Tbody,
+  Td,
+  Text,
+  Link,
+  useDisclosure,
+} from '@chakra-ui/react';
 import NextLink from 'next/link';
+import CreateDistributorModal from '../createDistributor';
 import TitleAction from '../titleAction';
 import useShowDistributor from './hooks/ShowDistributorHook';
 
 const ShowDistributor = () => {
   const { distributors } = useShowDistributor();
-  const createDistributor = () => {
-    console.log('createDistributor');
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const openModal = () => {
+    onOpen();
   };
   return (
     <>
@@ -14,8 +26,12 @@ const ShowDistributor = () => {
         title='Distributors'
         value=''
         actionTitle='Create Distributor'
-        clickHandler={createDistributor}
+        clickHandler={openModal}
       ></TitleAction>
+      <CreateDistributorModal
+        isOpen={isOpen}
+        onClose={onClose}
+      ></CreateDistributorModal>
       <Table size='sm' fontSize='xl'>
         <Thead>
           <Tr>

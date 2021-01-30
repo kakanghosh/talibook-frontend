@@ -1,12 +1,21 @@
 import { Tag } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import client from '../../../api/restClient';
 import { useAuth } from '../../../contexts/auth';
 import { TransactionData } from '../../../models';
+import {
+  populateTransactionOfShop,
+  selectTransaction,
+} from '../../../store/slices/transactionSlice';
 
 const useFetchTransaction = (distributorId, shopId) => {
-  const [transaction, setTransaction] = useState(null as TransactionData);
+  const dispatch = useDispatch();
   const { token } = useAuth();
+  const shoptransaction = useSelector(selectTransaction).find(
+    (st) => st.shopId === shopId
+  );
+  const transaction = shoptransaction?.transactionData;
 
   useEffect(() => {
     async function fetchDistributor() {
@@ -14,7 +23,12 @@ const useFetchTransaction = (distributorId, shopId) => {
       const { data } = await client.get<TransactionData>(
         `api/v1/distributors/${distributorId}/shops/${shopId}/transactions`
       );
-      setTransaction(data);
+      dispatch(
+        populateTransactionOfShop({
+          shopId,
+          transactionData: data,
+        })
+      );
     }
     fetchDistributor();
   }, []);

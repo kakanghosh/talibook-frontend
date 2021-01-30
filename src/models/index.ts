@@ -7,33 +7,58 @@ export interface TodoListSliceState {
   value: Todo[];
 }
 
-export class User {
+export interface DistributorSliceState {
+  value: Distributor[];
+}
+
+export class DistrubutorShops {
+  distributorId: number;
+  shops: Shop[];
+}
+
+export interface ShopSliceState {
+  distrubutorShops: DistrubutorShops[];
+}
+
+export class ShopTransaction {
+  shopId: number;
+  transactionData: TransactionData;
+}
+
+export interface TransactionSliceState {
+  shopsTransaction: ShopTransaction[];
+}
+
+export class Audit {
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export class User extends Audit {
   firstName: string;
   lastName: string;
   email: string;
-  createdAt: Date;
-  updatedAt: Date;
 }
 
-export class Shop {
+export class Shop extends Audit {
   id: number;
   name: string;
-  createdAt: Date;
-  updatedAt: Date;
 }
 
-export class Distributor {
+export class Distributor extends Audit {
   id: number;
   name: string;
-  createdAt: Date;
-  updatedAt: Date;
 }
-export class Transaction {
+export class Transaction extends Audit {
   id: number;
   amount: number;
   type: number;
-  createdAt: Date;
-  updatedAt: Date;
+}
+
+export class NewTransaction extends Audit {
+  totalDeposite: number;
+  totalPurchase: number;
+  transaction: Transaction;
 }
 
 export class TransactionData {
