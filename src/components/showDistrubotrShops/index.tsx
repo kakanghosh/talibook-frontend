@@ -7,10 +7,12 @@ import {
   Tbody,
   Td,
   Link,
-  Spinner,
+  useDisclosure,
+  Flex,
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import Skeleton from 'react-loading-skeleton';
+import CreateShopModal from '../createShop';
 import useFetchDistributor from '../showDistributor/hooks/DistributorHook';
 import TitleAction from '../titleAction';
 import useShowDistributorShops from './hooks/distributorShopsHook';
@@ -18,8 +20,9 @@ import useShowDistributorShops from './hooks/distributorShopsHook';
 const ShowDistributorShops = ({ distributorId }) => {
   const { shops } = useShowDistributorShops(distributorId);
   const { distributor } = useFetchDistributor(distributorId);
-  const createShop = () => {
-    console.log('Create Shop');
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const openModal = () => {
+    onOpen();
   };
 
   if (!shops || !distributor) {
@@ -32,43 +35,49 @@ const ShowDistributorShops = ({ distributorId }) => {
         title='Distributor Name:'
         value={distributor.name}
         actionTitle='Create Shop'
-        clickHandler={createShop}
+        clickHandler={openModal}
       ></TitleAction>
-
-      <Table size='sm' fontSize='xl'>
-        <Thead>
-          <Tr>
-            <Th>
-              <Text fontSize='xl'>Shop Name</Text>
-            </Th>
-            <Th>
-              <Text fontSize='xl'>Created At</Text>
-            </Th>
-            <Th></Th>
-          </Tr>
-        </Thead>
-        <Tbody>
-          {shops.map((shop) => (
-            <Tr key={shop.id}>
-              <Td>
-                <Text fontSize='md'>{shop.name}</Text>
-              </Td>
-              <Td>
-                <Text fontSize='md'>{shop.createdAt}</Text>
-              </Td>
-              <Td>
-                <Text fontSize='md'>
-                  <NextLink
-                    href={`/distributors/${distributorId}/shops/${shop.id}/transaction`}
-                  >
-                    <Link color='teal.500'>Show Transactions</Link>
-                  </NextLink>
-                </Text>
-              </Td>
+      <CreateShopModal
+        distributorId={distributorId}
+        isOpen={isOpen}
+        onClose={onClose}
+      ></CreateShopModal>
+      <Flex p='10px'>
+        <Table size='md' fontSize='xl'>
+          <Thead>
+            <Tr>
+              <Th>
+                <Text fontSize='xl'>Shop Name</Text>
+              </Th>
+              <Th>
+                <Text fontSize='xl'>Created At</Text>
+              </Th>
+              <Th></Th>
             </Tr>
-          ))}
-        </Tbody>
-      </Table>
+          </Thead>
+          <Tbody>
+            {shops.map((shop) => (
+              <Tr key={shop.id}>
+                <Td>
+                  <Text fontSize='md'>{shop.name}</Text>
+                </Td>
+                <Td>
+                  <Text fontSize='md'>{shop.createdAt}</Text>
+                </Td>
+                <Td>
+                  <Text fontSize='md'>
+                    <NextLink
+                      href={`/distributors/${distributorId}/shops/${shop.id}/transaction`}
+                    >
+                      <Link color='teal.500'>Show Transactions</Link>
+                    </NextLink>
+                  </Text>
+                </Td>
+              </Tr>
+            ))}
+          </Tbody>
+        </Table>
+      </Flex>
     </>
   );
 };

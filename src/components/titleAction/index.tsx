@@ -26,7 +26,7 @@ const TitleAction = ({
   return (
     <>
       {' '}
-      <Flex p='5px' wrap='wrap'>
+      <Flex p='10px' wrap='wrap'>
         <Center p='3px'>
           <Text textTransform='initial' fontSize='xl' m='3px'>
             {' '}

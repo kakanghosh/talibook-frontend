@@ -8,6 +8,7 @@ import {
   Text,
   Link,
   useDisclosure,
+  Flex,
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import CreateDistributorModal from '../createDistributor';

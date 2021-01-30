@@ -15,18 +15,23 @@ import {
   ModalOverlay,
   Stack,
 } from '@chakra-ui/react';
-import useCreateDistributor from './hooks/CreateDistributorHook';
+import useCreateShop from './hooks/CreateShopHook';
 
 type CreateDistributorModalProps = {
+  distributorId: number;
   isOpen: boolean;
   onClose: () => void;
 };
 
-function CreateDistributorModal({
+function CreateShopModal({
+  distributorId,
   isOpen,
   onClose,
 }: CreateDistributorModalProps) {
-  const { form, isFormInvalid, errorMessage } = useCreateDistributor(onClose);
+  const { form, isFormInvalid, errorMessage } = useCreateShop(
+    distributorId,
+    onClose
+  );
   const { values, handleSubmit, handleChange, handleBlur } = form;
 
   return (
@@ -41,7 +46,7 @@ function CreateDistributorModal({
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Create Distributor</ModalHeader>
+          <ModalHeader>Create Shop</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
             {errorMessage && (
@@ -91,4 +96,4 @@ function CreateDistributorModal({
   );
 }
 
-export default CreateDistributorModal;
+export default CreateShopModal;

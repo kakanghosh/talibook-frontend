@@ -12,8 +12,10 @@ import {
   Flex,
   Box,
   Spinner,
+  useDisclosure,
 } from '@chakra-ui/react';
 import Skeleton from 'react-loading-skeleton';
+import CreateTransactionModal from '../createTransaction';
 import useFetchShop from '../showDistrubotrShops/hooks/shopHook';
 import TitleAction from '../titleAction';
 import useFetchTransaction from './hooks/fetchTransactionHook';
@@ -24,9 +26,10 @@ const TransactionTable = ({ distributorId, shopId }) => {
     shopId
   );
   const { shop } = useFetchShop(distributorId, shopId);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const addTransaction = () => {
-    console.log('addTransaction');
+  const openModal = () => {
+    onOpen();
   };
 
   if (!transaction || !shop) {
@@ -39,8 +42,14 @@ const TransactionTable = ({ distributorId, shopId }) => {
         title='Shop Name:'
         value={shop.name}
         actionTitle='Add Transaction'
-        clickHandler={addTransaction}
+        clickHandler={openModal}
       ></TitleAction>
+      <CreateTransactionModal
+        distributorId={distributorId}
+        shopId={shopId}
+        isOpen={isOpen}
+        onClose={onClose}
+      ></CreateTransactionModal>
       <Flex justifyContent='flex-end'>
         <Box p='5px'>
           <Stat>
