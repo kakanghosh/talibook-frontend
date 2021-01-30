@@ -2,6 +2,7 @@ import Axios from 'axios';
 
 const urls = {
   development: `http://192.168.0.120:8000`,
+  production: `http://192.168.0.120:8000`,
 };
 console.log(`process.env.NODE_ENV`, process.env.NODE_ENV);
 

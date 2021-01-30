@@ -36,6 +36,7 @@ const TransactionTable = ({ distributorId, shopId }) => {
   if (!transaction || !shop) {
     return <Skeleton height={40} count={5} />;
   }
+  const remaining = transaction.totalPurchase - transaction.totalDeposite;
 
   return (
     <>
@@ -51,26 +52,30 @@ const TransactionTable = ({ distributorId, shopId }) => {
         isOpen={isOpen}
         onClose={onClose}
       ></CreateTransactionModal>
-      <Flex justifyContent='flex-end'>
+      <Flex justifyContent='center' p='5px'>
         <Box p='5px'>
           <Stat>
             <StatLabel>Total Purchase</StatLabel>
-            <StatNumber>&#2547; {transaction.totalPurchase}</StatNumber>
+            <StatNumber color='#e01111'>
+              &#2547; {transaction.totalPurchase}
+            </StatNumber>
           </Stat>
         </Box>
         <Box p='5px'>-</Box>
         <Box p='5px'>
           <Stat>
             <StatLabel>Total Deposite</StatLabel>
-            <StatNumber>&#2547; {transaction.totalDeposite}</StatNumber>
+            <StatNumber color='#0ca04f'>
+              &#2547; {transaction.totalDeposite}
+            </StatNumber>
           </Stat>
         </Box>
         <Box p='5px'>=</Box>
         <Box p='5px'>
           <Stat>
             <StatLabel>Remaining</StatLabel>
-            <StatNumber>
-              &#2547; {transaction.totalPurchase - transaction.totalDeposite}
+            <StatNumber color={remaining > 0 ? '#e01111' : '#0ca04f'}>
+              &#2547; {remaining}
             </StatNumber>
           </Stat>
         </Box>

@@ -14,6 +14,7 @@ import moment from 'moment';
 Moment.globalMoment = moment;
 Moment.globalTimezone = 'Asia/Dhaka';
 Moment.globalFormat = 'D MMM YYYY (h:mm:ss A)';
+//Moment.globalLocale = 'bn_BD';
 
 function CustomApp({ Component, pageProps }: AppProps) {
   return (
