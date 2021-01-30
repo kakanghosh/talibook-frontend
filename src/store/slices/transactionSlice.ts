@@ -14,18 +14,15 @@ const updateTransactionHistoryInShopSlice: CaseReducer<
   TransactionSliceState,
   PayloadAction<{ shopId: number; transactionData: NewTransaction }>
 > = (state, action) => {
-  const { payload } = action;
+  const { transactionData, shopId } = action.payload;
   const shopTransaction = state.shopsTransaction.find(
-    (st) => st.shopId === payload.shopId
+    (st) => st.shopId === shopId
   );
   if (shopTransaction) {
-    shopTransaction.transactionData.totalDeposite =
-      payload.transactionData.totalDeposite;
-    shopTransaction.transactionData.totalPurchase =
-      payload.transactionData.totalPurchase;
-    shopTransaction.transactionData.transactions.push(
-      payload.transactionData.transaction
-    );
+    const { transactionData: transactionDataFromStore } = shopTransaction;
+    transactionDataFromStore.totalDeposite = transactionData.totalDeposite;
+    transactionDataFromStore.totalPurchase = transactionData.totalPurchase;
+    transactionDataFromStore.transactions.push(transactionData.transaction);
   }
 };
 
@@ -50,7 +47,13 @@ export const {
   updateTransactionHistoryInShop,
 } = transactionSlice.actions;
 
-export const selectTransaction = ({ transaction }: RootState) =>
-  transaction.shopsTransaction;
+export const selectTransactionByShopId = (shopId: number) => ({
+  transaction,
+}: RootState) => {
+  const shopTransaction = transaction.shopsTransaction.find(
+    (st) => st.shopId === shopId
+  );
+  return shopTransaction?.transactionData;
+};
 
 export default transactionSlice.reducer;

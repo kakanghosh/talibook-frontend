@@ -5,17 +5,13 @@ import { useAuth } from '../../../contexts/auth';
 import { Shop } from '../../../models';
 import {
   populateShopsInDistributor,
-  selectShops,
+  selectShopsbyDistributorId,
 } from '../../../store/slices/shopSlice';
 
 const useShowDistributorShops = (distributorId) => {
   const dispatch = useDispatch();
   const { token } = useAuth();
-  const distributorShops = useSelector(selectShops);
-  const distributor = distributorShops.find(
-    (ds) => ds.distributorId === distributorId
-  );
-  const shops = distributor?.shops;
+  const shops = useSelector(selectShopsbyDistributorId(distributorId));
 
   useEffect(() => {
     async function fetchDistributor() {

@@ -40,6 +40,13 @@ export const {
   addShopInDistributor,
 } = shopSlice.actions;
 
-export const selectShops = ({ shop }: RootState) => shop.distrubutorShops;
+export const selectShopsbyDistributorId = (distributorId: number) => ({
+  shop,
+}: RootState) => {
+  const ds = shop.distrubutorShops.find(
+    (ds) => ds.distributorId == distributorId
+  );
+  return ds?.shops;
+};
 
 export default shopSlice.reducer;

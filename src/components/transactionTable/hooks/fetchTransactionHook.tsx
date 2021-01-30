@@ -6,16 +6,13 @@ import { useAuth } from '../../../contexts/auth';
 import { TransactionData } from '../../../models';
 import {
   populateTransactionOfShop,
-  selectTransaction,
+  selectTransactionByShopId,
 } from '../../../store/slices/transactionSlice';
 
 const useFetchTransaction = (distributorId, shopId) => {
   const dispatch = useDispatch();
   const { token } = useAuth();
-  const shoptransaction = useSelector(selectTransaction).find(
-    (st) => st.shopId === shopId
-  );
-  const transaction = shoptransaction?.transactionData;
+  const transaction = useSelector(selectTransactionByShopId(shopId));
 
   useEffect(() => {
     async function fetchDistributor() {
