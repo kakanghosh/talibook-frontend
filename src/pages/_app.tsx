@@ -7,6 +7,13 @@ import store from '../store/store';
 import { APP } from '../common/constants';
 import { ChakraProvider } from '@chakra-ui/react';
 import { AuthProvider, ProtectedRoute } from '../contexts/auth';
+import Moment from 'react-moment';
+import 'moment-timezone';
+import moment from 'moment';
+
+Moment.globalMoment = moment;
+Moment.globalTimezone = 'Asia/Dhaka';
+Moment.globalFormat = 'D MMM YYYY (h:mm:ss A)';
 
 function CustomApp({ Component, pageProps }: AppProps) {
   return (

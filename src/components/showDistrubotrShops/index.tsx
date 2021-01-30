@@ -12,6 +12,7 @@ import {
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import Skeleton from 'react-loading-skeleton';
+import Moment from 'react-moment';
 import CreateShopModal from '../createShop';
 import useFetchDistributor from '../showDistributor/hooks/DistributorHook';
 import TitleAction from '../titleAction';
@@ -42,42 +43,42 @@ const ShowDistributorShops = ({ distributorId }) => {
         isOpen={isOpen}
         onClose={onClose}
       ></CreateShopModal>
-      <Flex p='10px'>
-        <Table size='md' fontSize='xl'>
-          <Thead>
-            <Tr>
-              <Th>
-                <Text fontSize='xl'>Shop Name</Text>
-              </Th>
-              <Th>
-                <Text fontSize='xl'>Created At</Text>
-              </Th>
-              <Th></Th>
+      <Table size='sm' fontSize='xl'>
+        <Thead>
+          <Tr>
+            <Th>
+              <Text fontSize='xl'>Shop Name</Text>
+            </Th>
+            <Th>
+              <Text fontSize='xl'>Created At</Text>
+            </Th>
+            <Th></Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          {shops.map((shop) => (
+            <Tr key={shop.id}>
+              <Td>
+                <Text fontSize='md'>{shop.name}</Text>
+              </Td>
+              <Td>
+                <Text fontSize='md'>
+                  <Moment date={shop.createdAt} />
+                </Text>
+              </Td>
+              <Td>
+                <Text fontSize='md'>
+                  <NextLink
+                    href={`/distributors/${distributorId}/shops/${shop.id}/transaction`}
+                  >
+                    <Link color='teal.500'>Show Transactions</Link>
+                  </NextLink>
+                </Text>
+              </Td>
             </Tr>
-          </Thead>
-          <Tbody>
-            {shops.map((shop) => (
-              <Tr key={shop.id}>
-                <Td>
-                  <Text fontSize='md'>{shop.name}</Text>
-                </Td>
-                <Td>
-                  <Text fontSize='md'>{shop.createdAt}</Text>
-                </Td>
-                <Td>
-                  <Text fontSize='md'>
-                    <NextLink
-                      href={`/distributors/${distributorId}/shops/${shop.id}/transaction`}
-                    >
-                      <Link color='teal.500'>Show Transactions</Link>
-                    </NextLink>
-                  </Text>
-                </Td>
-              </Tr>
-            ))}
-          </Tbody>
-        </Table>
-      </Flex>
+          ))}
+        </Tbody>
+      </Table>
     </>
   );
 };

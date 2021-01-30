@@ -15,6 +15,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import Skeleton from 'react-loading-skeleton';
+import Moment from 'react-moment';
 import CreateTransactionModal from '../createTransaction';
 import useFetchShop from '../showDistrubotrShops/hooks/shopHook';
 import TitleAction from '../titleAction';
@@ -92,7 +93,9 @@ const TransactionTable = ({ distributorId, shopId }) => {
           {transaction.transactions?.map((tran) => (
             <Tr key={tran.id}>
               <Td>
-                <Text fontSize='md'>{tran.createdAt}</Text>
+                <Text fontSize='md'>
+                  <Moment date={tran.createdAt} />
+                </Text>
               </Td>
               <Td>
                 <Text fontSize='md'>&#2547; {tran.amount}</Text>

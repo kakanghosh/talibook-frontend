@@ -8,9 +8,9 @@ import {
   Text,
   Link,
   useDisclosure,
-  Flex,
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
+import Moment from 'react-moment';
 import CreateDistributorModal from '../createDistributor';
 import TitleAction from '../titleAction';
 import useShowDistributor from './hooks/ShowDistributorHook';
@@ -37,10 +37,10 @@ const ShowDistributor = () => {
         <Thead>
           <Tr>
             <Th>
-              <Text fontSize='xl'>Distributor Name</Text>
+              <Text fontSize='md'>Distributor Name</Text>
             </Th>
             <Th>
-              <Text fontSize='xl'>Created At</Text>
+              <Text fontSize='md'>Created At</Text>
             </Th>
             <Th></Th>
           </Tr>
@@ -52,7 +52,9 @@ const ShowDistributor = () => {
                 <Text fontSize='md'>{distributor.name}</Text>
               </Td>
               <Td>
-                <Text fontSize='md'>{distributor.createdAt}</Text>
+                <Text fontSize='md'>
+                  <Moment date={distributor.createdAt} />
+                </Text>
               </Td>
               <Td>
                 <Text fontSize='md'>
