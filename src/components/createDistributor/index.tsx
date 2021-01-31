@@ -15,6 +15,8 @@ import {
   ModalOverlay,
   Stack,
 } from '@chakra-ui/react';
+import { useTranslation } from 'react-i18next';
+import keys from '../../i18n/translations/keys';
 import useCreateDistributor from './hooks/CreateDistributorHook';
 
 type CreateDistributorModalProps = {
@@ -28,6 +30,7 @@ function CreateDistributorModal({
 }: CreateDistributorModalProps) {
   const { form, isFormInvalid, errorMessage } = useCreateDistributor(onClose);
   const { values, handleSubmit, handleChange, handleBlur } = form;
+  const { t } = useTranslation();
 
   return (
     <>
@@ -41,7 +44,7 @@ function CreateDistributorModal({
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Create Distributor</ModalHeader>
+          <ModalHeader>{t(keys.Create_Distributor)}</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
             {errorMessage && (
@@ -54,7 +57,7 @@ function CreateDistributorModal({
             )}
             <form onSubmit={handleSubmit} noValidate>
               <FormControl id='name'>
-                <FormLabel>Name</FormLabel>
+                <FormLabel>{t(keys.Name)}</FormLabel>
                 <Input
                   type='text'
                   value={values.name}
@@ -69,7 +72,7 @@ function CreateDistributorModal({
                   type='submit'
                   disabled={isFormInvalid}
                 >
-                  Save
+                  {t(keys.Save)}
                 </Button>
               </Flex>
             </form>
@@ -82,7 +85,7 @@ function CreateDistributorModal({
                 onClose();
               }}
             >
-              Cancel
+              {t(keys.Cancel)}
             </Button>
           </ModalFooter>
         </ModalContent>

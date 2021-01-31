@@ -10,7 +10,9 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
+import { useTranslation } from 'react-i18next';
 import Moment from 'react-moment';
+import keys from '../../i18n/translations/keys';
 import CreateDistributorModal from '../createDistributor';
 import TitleAction from '../titleAction';
 import useShowDistributor from './hooks/ShowDistributorHook';
@@ -18,15 +20,16 @@ import useShowDistributor from './hooks/ShowDistributorHook';
 const ShowDistributor = () => {
   const { distributors } = useShowDistributor();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { t } = useTranslation();
   const openModal = () => {
     onOpen();
   };
   return (
     <>
       <TitleAction
-        title='Distributors'
+        title={t(keys.Distributors)}
         value=''
-        actionTitle='Create Distributor'
+        actionTitle={t(keys.Create_Distributor)}
         clickHandler={openModal}
       ></TitleAction>
       <CreateDistributorModal
@@ -37,10 +40,10 @@ const ShowDistributor = () => {
         <Thead>
           <Tr>
             <Th>
-              <Text fontSize='md'>Distributor Name</Text>
+              <Text fontSize='md'>{t(keys.Distributor_Name)}</Text>
             </Th>
             <Th>
-              <Text fontSize='md'>Created At</Text>
+              <Text fontSize='md'>{t(keys.Date)}</Text>
             </Th>
             <Th></Th>
           </Tr>
@@ -63,7 +66,7 @@ const ShowDistributor = () => {
                       color='teal.500'
                       href={`/distributors/${distributor.id}/shops`}
                     >
-                      Show shops
+                      {t(keys.Show_Shop)}
                     </Link>
                   </NextLink>
                 </Text>

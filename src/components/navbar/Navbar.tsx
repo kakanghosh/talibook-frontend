@@ -7,22 +7,23 @@ import {
   Flex,
   Heading,
   Spacer,
-  Stack,
   Wrap,
-  WrapItem,
 } from '@chakra-ui/react';
 import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../contexts/auth';
+import keys from '../../i18n/translations/keys';
 
 const Navbar = () => {
   const { logout, user } = useAuth();
+  const { t } = useTranslation();
 
   return (
     <Flex backgroundColor='#256'>
       <Box p='4' color='white'>
         <Heading as='h2' size='xl'>
           <Link href='/'>
-            <a>Talibook</a>
+            <a>{t(keys.App_Name)}</a>
           </Link>
         </Heading>
       </Box>
@@ -46,7 +47,7 @@ const Navbar = () => {
                 leftIcon={<SettingsIcon />}
                 variant='solid'
               >
-                Logout
+                {t(keys.Logout)}
               </Button>
             </Box>
           </Center>

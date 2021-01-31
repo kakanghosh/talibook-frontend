@@ -11,8 +11,10 @@ import {
   Flex,
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
+import { useTranslation } from 'react-i18next';
 import Skeleton from 'react-loading-skeleton';
 import Moment from 'react-moment';
+import keys from '../../i18n/translations/keys';
 import CreateShopModal from '../createShop';
 import useFetchDistributor from '../showDistributor/hooks/DistributorHook';
 import TitleAction from '../titleAction';
@@ -22,6 +24,7 @@ const ShowDistributorShops = ({ distributorId }) => {
   const { shops } = useShowDistributorShops(distributorId);
   const { distributor } = useFetchDistributor(distributorId);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { t } = useTranslation();
   const openModal = () => {
     onOpen();
   };
@@ -33,9 +36,9 @@ const ShowDistributorShops = ({ distributorId }) => {
   return (
     <>
       <TitleAction
-        title='Distributor Name:'
+        title={t(keys.Distributor_Name) + ':'}
         value={distributor.name}
-        actionTitle='Create Shop'
+        actionTitle={t(keys.Create_Shop)}
         clickHandler={openModal}
       ></TitleAction>
       <CreateShopModal
@@ -47,10 +50,10 @@ const ShowDistributorShops = ({ distributorId }) => {
         <Thead>
           <Tr>
             <Th>
-              <Text fontSize='xl'>Shop Name</Text>
+              <Text fontSize='xl'>{t(keys.Shop_Name)}</Text>
             </Th>
             <Th>
-              <Text fontSize='xl'>Created At</Text>
+              <Text fontSize='xl'>{t(keys.Date)}</Text>
             </Th>
             <Th></Th>
           </Tr>
@@ -71,7 +74,7 @@ const ShowDistributorShops = ({ distributorId }) => {
                   <NextLink
                     href={`/distributors/${distributorId}/shops/${shop.id}/transaction`}
                   >
-                    <Link color='teal.500'>Show Transactions</Link>
+                    <Link color='teal.500'>{t(keys.Transactions)}</Link>
                   </NextLink>
                 </Text>
               </Td>

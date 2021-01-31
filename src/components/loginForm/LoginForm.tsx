@@ -12,10 +12,11 @@ import {
   Text,
   Link,
   Flex,
-  Box,
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import useLoginForm from './hooks/LoginFormHook';
+import { useTranslation } from 'react-i18next';
+import keys from '../../i18n/translations/keys';
 
 function LoginForm() {
   const {
@@ -25,8 +26,8 @@ function LoginForm() {
     loginFailed,
     updateShowPlainPassword,
   } = useLoginForm();
-
   const { values, handleSubmit, handleChange, handleBlur } = loginForm;
+  const { t } = useTranslation();
 
   return (
     <div>
@@ -40,7 +41,7 @@ function LoginForm() {
       )}
       <form onSubmit={handleSubmit} noValidate>
         <FormControl id='email'>
-          <FormLabel>Email address</FormLabel>
+          <FormLabel>{t(keys.Email_Address)}</FormLabel>
           <Input
             type='email'
             value={values.email}
@@ -49,7 +50,7 @@ function LoginForm() {
           />
         </FormControl>
         <FormControl id='password'>
-          <FormLabel>Password</FormLabel>
+          <FormLabel>{t(keys.Password)}</FormLabel>
           <InputGroup>
             <Input
               type={showPlainPassword ? 'text' : 'password'}
@@ -64,7 +65,7 @@ function LoginForm() {
                 size='sm'
                 onClick={updateShowPlainPassword}
               >
-                {showPlainPassword ? 'Hide' : 'Show'}
+                {showPlainPassword ? t(keys.Hide) : t(keys.Show)}
               </Button>
             </InputRightElement>
           </InputGroup>
@@ -76,7 +77,7 @@ function LoginForm() {
             type='submit'
             disabled={isFormValid}
           >
-            Login
+            {t(keys.Login)}
           </Button>
           <Text fontSize='md'>
             <NextLink href={`/auth/create-account`}>
@@ -85,7 +86,7 @@ function LoginForm() {
                 color='teal.500'
                 href={`/auth/create-account`}
               >
-                Create New Account
+                {t(keys.Create_New_Account)}
               </Link>
             </NextLink>
           </Text>

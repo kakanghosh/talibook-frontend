@@ -10,11 +10,12 @@ import { AuthProvider, ProtectedRoute } from '../contexts/auth';
 import Moment from 'react-moment';
 import 'moment-timezone';
 import moment from 'moment';
+import '../i18n/settings';
 
 Moment.globalMoment = moment;
 Moment.globalTimezone = 'Asia/Dhaka';
 Moment.globalFormat = 'D MMM YYYY (h:mm:ss A)';
-//Moment.globalLocale = 'bn_BD';
+Moment.globalLocale = 'bn_BD';
 
 function CustomApp({ Component, pageProps }: AppProps) {
   return (

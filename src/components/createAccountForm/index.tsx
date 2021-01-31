@@ -16,6 +16,8 @@ import {
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import useCreateAccountForm from './hooks/CreateAccountFormHook';
+import { useTranslation } from 'react-i18next';
+import keys from '../../i18n/translations/keys';
 
 function CreateAccountForm() {
   const {
@@ -28,6 +30,7 @@ function CreateAccountForm() {
     togglePlainRePassword,
   } = useCreateAccountForm();
   const { values, handleSubmit, handleChange, handleBlur } = createAccountForm;
+  const { t } = useTranslation();
 
   return (
     <Box p='15px'>
@@ -42,7 +45,7 @@ function CreateAccountForm() {
       <form onSubmit={handleSubmit} noValidate>
         <Flex>
           <FormControl id='firstName' mr='3px'>
-            <FormLabel>First Name</FormLabel>
+            <FormLabel>{t(keys.First_Name)}</FormLabel>
             <Input
               type='text'
               value={values.firstName}
@@ -51,7 +54,7 @@ function CreateAccountForm() {
             />
           </FormControl>
           <FormControl id='lastName' ml='3px'>
-            <FormLabel>Last Name</FormLabel>
+            <FormLabel>{t(keys.Last_Name)}</FormLabel>
             <Input
               type='text'
               value={values.lastName}
@@ -61,7 +64,7 @@ function CreateAccountForm() {
           </FormControl>
         </Flex>
         <FormControl id='email'>
-          <FormLabel>Email address</FormLabel>
+          <FormLabel>{t(keys.Email_Address)}</FormLabel>
           <Input
             type='email'
             value={values.email}
@@ -70,7 +73,7 @@ function CreateAccountForm() {
           />
         </FormControl>
         <FormControl id='password'>
-          <FormLabel>Password</FormLabel>
+          <FormLabel>{t(keys.Password)}</FormLabel>
           <InputGroup>
             <Input
               type={plainPassword ? 'text' : 'password'}
@@ -85,13 +88,13 @@ function CreateAccountForm() {
                 size='sm'
                 onClick={togglePlainPassword}
               >
-                {plainPassword ? 'Hide' : 'Show'}
+                {plainPassword ? t(keys.Hide) : t(keys.Show)}
               </Button>
             </InputRightElement>
           </InputGroup>
         </FormControl>
         <FormControl id='repassword'>
-          <FormLabel>Re Password</FormLabel>
+          <FormLabel>{t(keys.Re_Password)}</FormLabel>
           <InputGroup>
             <Input
               type={plainRepassword ? 'text' : 'password'}
@@ -106,7 +109,7 @@ function CreateAccountForm() {
                 size='sm'
                 onClick={togglePlainRePassword}
               >
-                {plainRepassword ? 'Hide' : 'Show'}
+                {plainRepassword ? t(keys.Hide) : t(keys.Show)}
               </Button>
             </InputRightElement>
           </InputGroup>
@@ -119,12 +122,12 @@ function CreateAccountForm() {
             mr='6px'
             disabled={isFormValid}
           >
-            Create Account
+            {t(keys.Create_Account)}
           </Button>
           <Text fontSize='md'>
             <NextLink href={`/auth/login`}>
               <Link textColor='white' color='teal.500' href={`/auth/login`}>
-                Already have an account?
+                {t(keys.Already_Have_An_Account)}
               </Link>
             </NextLink>
           </Text>

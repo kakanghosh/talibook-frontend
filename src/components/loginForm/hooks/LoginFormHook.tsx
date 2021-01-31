@@ -1,8 +1,10 @@
 import { useToast } from '@chakra-ui/react';
 import { useFormik } from 'formik';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { SchemaOf, object, string } from 'yup';
 import { useAuth } from '../../../contexts/auth';
+import keys from '../../../i18n/translations/keys';
 
 type LoginData = {
   email: string;
@@ -22,6 +24,7 @@ function useLoginForm() {
   const [showPlainPassword, setShowPlainPassword] = useState(false);
   const [loginFailed, setLoginFailed] = useState(false);
   const toast = useToast();
+  const { t } = useTranslation();
 
   const loginForm = useFormik<LoginData>({
     initialValues: {
@@ -57,8 +60,8 @@ function useLoginForm() {
 
   const showToast = () =>
     toast({
-      title: 'Login Successful.',
-      description: "We're redirecting you to the Dashboard.",
+      title: t(keys.Login_Succesful),
+      description: t(keys.Redirecting_You_To_Dashboard),
       status: 'success',
       duration: 9000,
       isClosable: true,

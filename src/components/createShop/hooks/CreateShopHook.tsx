@@ -1,10 +1,12 @@
 import { useToast } from '@chakra-ui/react';
 import { useFormik } from 'formik';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { SchemaOf, object, string } from 'yup';
 import client from '../../../api/restClient';
-import { Distributor, Shop } from '../../../models';
+import keys from '../../../i18n/translations/keys';
+import { Shop } from '../../../models';
 import { addShopInDistributor } from '../../../store/slices/shopSlice';
 
 type CreateShopData = {
@@ -19,6 +21,7 @@ function useCreateShop(distributorId: number, onClose: () => void) {
   const [errorMessage, setErrorMessage] = useState(null);
   const toast = useToast();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const form = useFormik<CreateShopData>({
     initialValues: {
@@ -53,7 +56,7 @@ function useCreateShop(distributorId: number, onClose: () => void) {
 
   const showToast = () =>
     toast({
-      title: 'Shop created successfully.',
+      title: t(keys.Shop_Created_Successfully),
       status: 'success',
       duration: 3000,
       isClosable: true,

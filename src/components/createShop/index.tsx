@@ -15,6 +15,8 @@ import {
   ModalOverlay,
   Stack,
 } from '@chakra-ui/react';
+import { useTranslation } from 'react-i18next';
+import keys from '../../i18n/translations/keys';
 import useCreateShop from './hooks/CreateShopHook';
 
 type CreateDistributorModalProps = {
@@ -33,6 +35,7 @@ function CreateShopModal({
     onClose
   );
   const { values, handleSubmit, handleChange, handleBlur } = form;
+  const { t } = useTranslation();
 
   return (
     <>
@@ -46,7 +49,7 @@ function CreateShopModal({
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Create Shop</ModalHeader>
+          <ModalHeader>{t(keys.Create_Shop)}</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
             {errorMessage && (
@@ -59,7 +62,7 @@ function CreateShopModal({
             )}
             <form onSubmit={handleSubmit} noValidate>
               <FormControl id='name'>
-                <FormLabel>Name</FormLabel>
+                <FormLabel>{t(keys.Name)}</FormLabel>
                 <Input
                   type='text'
                   value={values.name}
@@ -74,7 +77,7 @@ function CreateShopModal({
                   type='submit'
                   disabled={isFormInvalid}
                 >
-                  Save
+                  {t(keys.Save)}
                 </Button>
               </Flex>
             </form>
@@ -87,7 +90,7 @@ function CreateShopModal({
                 onClose();
               }}
             >
-              Cancel
+              {t(keys.Cancel)}
             </Button>
           </ModalFooter>
         </ModalContent>
