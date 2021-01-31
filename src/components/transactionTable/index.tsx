@@ -14,8 +14,10 @@ import {
   Spinner,
   useDisclosure,
 } from '@chakra-ui/react';
+import { useTranslation } from 'react-i18next';
 import Skeleton from 'react-loading-skeleton';
 import Moment from 'react-moment';
+import keys from '../../i18n/translations/keys';
 import CreateTransactionModal from '../createTransaction';
 import useFetchShop from '../showDistrubotrShops/hooks/shopHook';
 import TitleAction from '../titleAction';
@@ -28,6 +30,7 @@ const TransactionTable = ({ distributorId, shopId }) => {
   );
   const { shop } = useFetchShop(distributorId, shopId);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { t } = useTranslation();
 
   const openModal = () => {
     onOpen();
@@ -41,9 +44,9 @@ const TransactionTable = ({ distributorId, shopId }) => {
   return (
     <>
       <TitleAction
-        title='Shop Name:'
+        title={`${t(keys.Shop_Name)}:`}
         value={shop.name}
-        actionTitle='Add Transaction'
+        actionTitle={t(keys.Add_Transaction)}
         clickHandler={openModal}
       ></TitleAction>
       <CreateTransactionModal
@@ -55,16 +58,16 @@ const TransactionTable = ({ distributorId, shopId }) => {
       <Flex justifyContent='center' p='5px'>
         <Box p='5px'>
           <Stat>
-            <StatLabel>Total Purchase</StatLabel>
+            <StatLabel>{t(keys.Total_Purchase)}</StatLabel>
             <StatNumber color='#e01111'>
               &#2547; {transaction.totalPurchase}
             </StatNumber>
           </Stat>
         </Box>
-        <Box p='5px'>-</Box>
+        <Box p='5px'> — </Box>
         <Box p='5px'>
           <Stat>
-            <StatLabel>Total Deposite</StatLabel>
+            <StatLabel>{t(keys.Total_Deposite)}</StatLabel>
             <StatNumber color='#0ca04f'>
               &#2547; {transaction.totalDeposite}
             </StatNumber>
@@ -73,7 +76,7 @@ const TransactionTable = ({ distributorId, shopId }) => {
         <Box p='5px'>=</Box>
         <Box p='5px'>
           <Stat>
-            <StatLabel>Remaining</StatLabel>
+            <StatLabel>{t(keys.Remaining)}</StatLabel>
             <StatNumber color={remaining > 0 ? '#e01111' : '#0ca04f'}>
               &#2547; {remaining}
             </StatNumber>
@@ -84,13 +87,13 @@ const TransactionTable = ({ distributorId, shopId }) => {
         <Thead>
           <Tr>
             <Th>
-              <Text fontSize='xl'>Date</Text>
+              <Text fontSize='xl'>{t(keys.Date)}</Text>
             </Th>
             <Th>
-              <Text fontSize='xl'>Amount</Text>
+              <Text fontSize='xl'>{t(keys.Amount)}</Text>
             </Th>
             <Th>
-              <Text fontSize='xl'>Type</Text>
+              <Text fontSize='xl'>{t(keys.Type)}</Text>
             </Th>
           </Tr>
         </Thead>

@@ -16,6 +16,8 @@ import {
   Select,
   Stack,
 } from '@chakra-ui/react';
+import { useTranslation } from 'react-i18next';
+import keys from '../../i18n/translations/keys';
 import useCreateTransaction from './hooks/CreateTransactionHook';
 
 type CreateDistributorModalProps = {
@@ -37,6 +39,7 @@ function CreateTransactionModal({
     onClose
   );
   const { values, handleSubmit, handleChange, handleBlur } = form;
+  const { t } = useTranslation();
 
   return (
     <>
@@ -50,7 +53,7 @@ function CreateTransactionModal({
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Create Transaction</ModalHeader>
+          <ModalHeader>{t(keys.Create_Transaction)}</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
             {errorMessage && (
@@ -63,7 +66,7 @@ function CreateTransactionModal({
             )}
             <form onSubmit={handleSubmit} noValidate>
               <FormControl id='amount' pb='3px'>
-                <FormLabel>Amount</FormLabel>
+                <FormLabel>{t(keys.Amount)}</FormLabel>
                 <Input
                   type='number'
                   value={values.amount}
@@ -72,16 +75,16 @@ function CreateTransactionModal({
                 />
               </FormControl>
               <FormControl id='type' pt='3px' pb='3px'>
-                <FormLabel>Type</FormLabel>
+                <FormLabel>{t(keys.Type)}</FormLabel>
                 <Select
-                  placeholder='Select Type'
+                  placeholder={t(keys.Select_Type)}
                   type='number'
                   value={values.type}
                   onChange={handleChange}
                   onBlur={handleBlur}
                 >
-                  <option value='0'>Deposite</option>
-                  <option value='1'>Purchase</option>
+                  <option value='0'>{t(keys.Deposite)}</option>
+                  <option value='1'>{t(keys.Purchase)}</option>
                 </Select>
               </FormControl>
               <Flex justifyContent='space-between' alignItems='flex-end'>
@@ -91,7 +94,7 @@ function CreateTransactionModal({
                   type='submit'
                   disabled={isFormInvalid}
                 >
-                  Save
+                  {t(keys.Save)}
                 </Button>
               </Flex>
             </form>
@@ -104,7 +107,7 @@ function CreateTransactionModal({
                 onClose();
               }}
             >
-              Cancel
+              {t(keys.Cancel)}
             </Button>
           </ModalFooter>
         </ModalContent>

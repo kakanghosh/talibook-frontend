@@ -36,7 +36,7 @@ const ShowDistributorShops = ({ distributorId }) => {
   return (
     <>
       <TitleAction
-        title={t(keys.Distributor_Name) + ':'}
+        title={`${t(keys.Distributor_Name)}:`}
         value={distributor.name}
         actionTitle={t(keys.Create_Shop)}
         clickHandler={openModal}

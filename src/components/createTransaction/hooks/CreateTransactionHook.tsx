@@ -1,9 +1,11 @@
 import { useToast } from '@chakra-ui/react';
 import { useFormik } from 'formik';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { SchemaOf, object, number } from 'yup';
 import client from '../../../api/restClient';
+import keys from '../../../i18n/translations/keys';
 import { NewTransaction, Shop } from '../../../models';
 import { updateTransactionHistoryInShop } from '../../../store/slices/transactionSlice';
 
@@ -25,6 +27,7 @@ function useCreateTransaction(
   const [errorMessage, setErrorMessage] = useState(null);
   const toast = useToast();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const form = useFormik<CreateShopData>({
     initialValues: {
@@ -62,7 +65,7 @@ function useCreateTransaction(
 
   const showToast = () =>
     toast({
-      title: 'Transaction created successfully.',
+      title: t(keys.Transaction_Created_Successfully),
       status: 'success',
       duration: 3000,
       isClosable: true,

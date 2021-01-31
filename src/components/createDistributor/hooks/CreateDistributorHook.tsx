@@ -1,9 +1,11 @@
 import { useToast } from '@chakra-ui/react';
 import { useFormik } from 'formik';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { SchemaOf, object, string } from 'yup';
 import client from '../../../api/restClient';
+import keys from '../../../i18n/translations/keys';
 import { Distributor } from '../../../models';
 import { addToDistributorList } from '../../../store/slices/distributorSlice';
 
@@ -19,6 +21,7 @@ function useCreateDistributor(onClose: () => void) {
   const [errorMessage, setErrorMessage] = useState(null);
   const toast = useToast();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const form = useFormik<CreateDistributorData>({
     initialValues: {
@@ -47,7 +50,7 @@ function useCreateDistributor(onClose: () => void) {
 
   const showToast = () =>
     toast({
-      title: 'Distributor created successfully.',
+      title: t(keys.Distributor_Created_Successfully),
       status: 'success',
       duration: 3000,
       isClosable: true,

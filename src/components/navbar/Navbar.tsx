@@ -41,12 +41,7 @@ const Navbar = () => {
               </Wrap>
             </Box>
             <Box p='5px'>
-              <Button
-                size='sm'
-                onClick={logout}
-                leftIcon={<SettingsIcon />}
-                variant='solid'
-              >
+              <Button color='white' size='sm' onClick={logout} variant='ghosh'>
                 {t(keys.Logout)}
               </Button>
             </Box>
