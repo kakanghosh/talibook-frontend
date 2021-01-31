@@ -1,0 +1,7 @@
+version: '3'
+
+services:
+  talibook-frontend:
+    image: talibook-frontend:v1
+    ports:
+      - 3000:3000

@@ -2,6 +2,7 @@ export default {
   App_Name: 'App Name',
   Already_Have_An_Account: 'Already have an account',
   Add_Transaction: 'Add Transaction',
+  Account_Creation_Successful: 'Account Creation Successful',
 
   Create_New_Account: 'Create New Account',
   Create_Account: 'Create Accound',
@@ -49,4 +50,6 @@ export default {
   Amount: 'Amount',
   Type: 'Type',
   Transaction_Created_Successfully: 'Transaction Created Successfully',
+
+  Redirecting_To_Login_Page: 'Redirecting To Login Page',
 };

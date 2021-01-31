@@ -13,6 +13,7 @@ import {
   Box,
   Spinner,
   useDisclosure,
+  Stack,
 } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import Skeleton from 'react-loading-skeleton';
@@ -43,78 +44,86 @@ const TransactionTable = ({ distributorId, shopId }) => {
 
   return (
     <>
-      <TitleAction
-        title={`${t(keys.Shop_Name)}:`}
-        value={shop.name}
-        actionTitle={t(keys.Add_Transaction)}
-        clickHandler={openModal}
-      ></TitleAction>
-      <CreateTransactionModal
-        distributorId={distributorId}
-        shopId={shopId}
-        isOpen={isOpen}
-        onClose={onClose}
-      ></CreateTransactionModal>
-      <Flex justifyContent='center' p='5px'>
-        <Box p='5px'>
-          <Stat>
-            <StatLabel>{t(keys.Total_Purchase)}</StatLabel>
-            <StatNumber color='#e01111'>
-              &#2547; {transaction.totalPurchase}
-            </StatNumber>
-          </Stat>
+      <Stack pr='5vw' pl='5vw'>
+        <Box>
+          <TitleAction
+            title={`${t(keys.Shop_Name)}:`}
+            value={shop.name}
+            actionTitle={t(keys.Add_Transaction)}
+            clickHandler={openModal}
+          ></TitleAction>
         </Box>
-        <Box p='5px'> — </Box>
-        <Box p='5px'>
-          <Stat>
-            <StatLabel>{t(keys.Total_Deposite)}</StatLabel>
-            <StatNumber color='#0ca04f'>
-              &#2547; {transaction.totalDeposite}
-            </StatNumber>
-          </Stat>
+        <Box>
+          <CreateTransactionModal
+            distributorId={distributorId}
+            shopId={shopId}
+            isOpen={isOpen}
+            onClose={onClose}
+          ></CreateTransactionModal>
         </Box>
-        <Box p='5px'>=</Box>
-        <Box p='5px'>
-          <Stat>
-            <StatLabel>{t(keys.Remaining)}</StatLabel>
-            <StatNumber color={remaining > 0 ? '#e01111' : '#0ca04f'}>
-              &#2547; {remaining}
-            </StatNumber>
-          </Stat>
+        <Box>
+          <Flex justifyContent='center' p='5px'>
+            <Box p='5px'>
+              <Stat>
+                <StatLabel>{t(keys.Total_Purchase)}</StatLabel>
+                <StatNumber color='#e01111'>
+                  &#2547; {transaction.totalPurchase}
+                </StatNumber>
+              </Stat>
+            </Box>
+            <Box p='5px'> — </Box>
+            <Box p='5px'>
+              <Stat>
+                <StatLabel>{t(keys.Total_Deposite)}</StatLabel>
+                <StatNumber color='#0ca04f'>
+                  &#2547; {transaction.totalDeposite}
+                </StatNumber>
+              </Stat>
+            </Box>
+            <Box p='5px'>=</Box>
+            <Box p='5px'>
+              <Stat>
+                <StatLabel>{t(keys.Remaining)}</StatLabel>
+                <StatNumber color={remaining > 0 ? '#e01111' : '#0ca04f'}>
+                  &#2547; {remaining}
+                </StatNumber>
+              </Stat>
+            </Box>
+          </Flex>
+          <Table size='sm' fontSize='xl'>
+            <Thead>
+              <Tr>
+                <Th>
+                  <Text fontSize='xl'>{t(keys.Date)}</Text>
+                </Th>
+                <Th>
+                  <Text fontSize='xl'>{t(keys.Amount)}</Text>
+                </Th>
+                <Th>
+                  <Text fontSize='xl'>{t(keys.Type)}</Text>
+                </Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {transaction.transactions?.map((tran) => (
+                <Tr key={tran.id}>
+                  <Td>
+                    <Text fontSize='md'>
+                      <Moment date={tran.createdAt} />
+                    </Text>
+                  </Td>
+                  <Td>
+                    <Text fontSize='md'>&#2547; {tran.amount}</Text>
+                  </Td>
+                  <Td>
+                    <Text fontSize='md'>{transactionType(tran.type)}</Text>
+                  </Td>
+                </Tr>
+              ))}
+            </Tbody>
+          </Table>
         </Box>
-      </Flex>
-      <Table size='sm' fontSize='xl'>
-        <Thead>
-          <Tr>
-            <Th>
-              <Text fontSize='xl'>{t(keys.Date)}</Text>
-            </Th>
-            <Th>
-              <Text fontSize='xl'>{t(keys.Amount)}</Text>
-            </Th>
-            <Th>
-              <Text fontSize='xl'>{t(keys.Type)}</Text>
-            </Th>
-          </Tr>
-        </Thead>
-        <Tbody>
-          {transaction.transactions?.map((tran) => (
-            <Tr key={tran.id}>
-              <Td>
-                <Text fontSize='md'>
-                  <Moment date={tran.createdAt} />
-                </Text>
-              </Td>
-              <Td>
-                <Text fontSize='md'>&#2547; {tran.amount}</Text>
-              </Td>
-              <Td>
-                <Text fontSize='md'>{transactionType(tran.type)}</Text>
-              </Td>
-            </Tr>
-          ))}
-        </Tbody>
-      </Table>
+      </Stack>
     </>
   );
 };

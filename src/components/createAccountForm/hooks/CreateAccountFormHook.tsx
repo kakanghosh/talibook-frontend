@@ -1,8 +1,10 @@
 import { useToast } from '@chakra-ui/react';
 import { useFormik } from 'formik';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { SchemaOf, object, string, ref } from 'yup';
 import client from '../../../api/restClient';
+import keys from '../../../i18n/translations/keys';
 import { User } from '../../../models';
 
 type CreateAccountData = {
@@ -32,6 +34,7 @@ function useCreateAccountForm() {
   const [plainRepassword, setPlainRepassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
   const toast = useToast();
+  const { t } = useTranslation();
 
   const createAccountForm = useFormik<CreateAccountData>({
     initialValues: {
@@ -74,8 +77,8 @@ function useCreateAccountForm() {
 
   const showToast = () =>
     toast({
-      title: 'Account creation Successful.',
-      description: "We're redirecting you to the Login Page.",
+      title: t(keys.Account_Creation_Successful),
+      description: t(keys.Redirecting_To_Login_Page),
       status: 'success',
       duration: 9000,
       isClosable: true,

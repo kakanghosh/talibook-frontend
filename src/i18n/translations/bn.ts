@@ -3,6 +3,7 @@ export default {
   [keys.App_Name]: 'টালিবুক',
   [keys.Already_Have_An_Account]: 'পূর্বেই একাউন্ট আছে?',
   [keys.Add_Transaction]: 'লেনদেন যোগ করুন',
+  [keys.Account_Creation_Successful]: 'একাউন্ট সফল ভাবে তৈরি হয়েছে',
 
   [keys.Create_New_Account]: 'নতুন একাউন্ট তৈরি করুন?',
   [keys.Create_Account]: 'একাউন্ট তৈরি করুন',
@@ -34,7 +35,8 @@ export default {
   [keys.Purchase]: 'ক্রয়',
 
   [keys.Re_Password]: 'পুনারায় পাসওয়ার্ড',
-  [keys.Redirecting_You_To_Dashboard]: 'আমরা আপনাকে ড্যাসবোর্ডে নিয়ে যাচ্ছি ',
+  [keys.Redirecting_You_To_Dashboard]: 'আমরা আপনাকে ড্যাসবোর্ডে নিয়ে যাচ্ছি',
+  [keys.Redirecting_To_Login_Page]: 'আমরা আপনাকে লগইন নিয়ে যাচ্ছি',
 
   [keys.Show]: 'দেখা',
   [keys.Show_Shop]: 'দোকান গুলি',
@@ -46,7 +48,7 @@ export default {
   [keys.Transactions]: 'লেনদেন',
   [keys.Total_Deposite]: 'মোট জমা',
   [keys.Total_Purchase]: 'মোট ক্রয়',
-  [keys.Remaining]: 'মোট জমা',
+  [keys.Remaining]: 'বাকি',
   [keys.Amount]: 'পরিমাণ',
   [keys.Type]: 'প্রকার',
   [keys.Transaction_Created_Successfully]: 'লেনদেন সফল ভাবে তৈরি হয়েছে',
