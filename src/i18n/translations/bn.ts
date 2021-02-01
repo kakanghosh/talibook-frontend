@@ -33,6 +33,7 @@ export default {
 
   [keys.Password]: 'পাসওয়ার্ড',
   [keys.Purchase]: 'ক্রয়',
+  [keys.Please_Wait]: 'অনুগ্রহপূর্বক অপেক্ষা করুন',
 
   [keys.Re_Password]: 'পুনারায় পাসওয়ার্ড',
   [keys.Redirecting_You_To_Dashboard]: 'আমরা আপনাকে ড্যাসবোর্ডে নিয়ে যাচ্ছি',

@@ -12,6 +12,7 @@ import {
   Text,
   Link,
   Flex,
+  Progress,
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import useLoginForm from './hooks/LoginFormHook';
@@ -24,6 +25,7 @@ function LoginForm() {
     loginForm,
     isFormValid,
     loginFailed,
+    tryingToLogin,
     updateShowPlainPassword,
   } = useLoginForm();
   const { values, handleSubmit, handleChange, handleBlur } = loginForm;
@@ -39,6 +41,7 @@ function LoginForm() {
           </Alert>{' '}
         </Stack>
       )}
+
       <form onSubmit={handleSubmit} noValidate>
         <FormControl id='email'>
           <FormLabel>{t(keys.Email_Address)}</FormLabel>
@@ -73,13 +76,16 @@ function LoginForm() {
         <Flex justifyContent='space-between' alignItems='flex-end'>
           <Button
             mt={4}
+            mr={2}
             colorScheme='teal'
             type='submit'
-            disabled={isFormValid}
+            disabled={isFormValid || tryingToLogin}
+            isLoading={tryingToLogin}
+            loadingText={t(keys.Please_Wait)}
           >
             {t(keys.Login)}
           </Button>
-          <Text fontSize='md'>
+          <Text fontSize='md' ml={2}>
             <NextLink href={`/auth/create-account`}>
               <Link
                 textColor='white'

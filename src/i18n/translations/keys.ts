@@ -32,6 +32,7 @@ export default {
 
   Password: 'Password',
   Purchase: 'Purchase',
+  Please_Wait: 'Please Wait',
 
   Re_Password: 'Re Password',
   Redirecting_You_To_Dashboard: 'Redirecting you to Dashboard',

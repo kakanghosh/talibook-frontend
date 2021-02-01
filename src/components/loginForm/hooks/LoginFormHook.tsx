@@ -25,6 +25,7 @@ function useLoginForm() {
   const [loginFailed, setLoginFailed] = useState(false);
   const toast = useToast();
   const { t } = useTranslation();
+  const [tryingToLogin, setTryingToLogin] = useState(false);
 
   const loginForm = useFormik<LoginData>({
     initialValues: {
@@ -34,14 +35,17 @@ function useLoginForm() {
     validationSchema,
     onSubmit: async (values) => {
       try {
+        setTryingToLogin(true);
         setLoginFailed(false);
         const user = await login(values.email, values.password);
         showToast();
         setTimeout(() => {
           setUser(user);
           window.location.pathname = '/';
+          setTryingToLogin(false);
         }, 2000);
       } catch ({ response }) {
+        setTryingToLogin(false);
         if (response.status == 401) {
           setLoginFailed(true);
         }
@@ -73,6 +77,7 @@ function useLoginForm() {
     loginForm,
     isFormValid,
     loginFailed,
+    tryingToLogin,
     updateShowPlainPassword,
   };
 }

@@ -19,7 +19,7 @@ const Navbar = () => {
   const { t } = useTranslation();
 
   return (
-    <Flex backgroundColor='#256'>
+    <Flex backgroundColor='#256' pr='5vw' pl='5vw'>
       <Box p='4' color='white'>
         <Heading as='h2' size='xl'>
           <Link href='/'>
