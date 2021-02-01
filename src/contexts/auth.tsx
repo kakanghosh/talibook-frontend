@@ -22,8 +22,6 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null);
 
   useEffect(() => {
-    console.log(`AuthProvider is called`);
-
     async function loadUserFromCookie() {
       const token = Cookies.get('token');
       const userFromCookie = Cookies.get('user');
@@ -92,21 +90,20 @@ export const useAuth = () => useContext(AuthContext);
 
 export const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, isLoading } = useAuth();
-
-  useEffect(() => {
-    console.log(`ProtectedRoute is called`);
-  }, []);
+  const [unProtectedUrls] = useState(['/auth/login', '/auth/create-account']);
 
   if (isLoading) {
     return <Skeleton height={40} count={5} />;
   } else if (
     !isAuthenticated &&
-    window.location.pathname != '/auth/login' &&
-    window.location.pathname != '/auth/create-account'
+    unProtectedUrls.indexOf(window.location.pathname) < 0
   ) {
-    window.location.pathname = '/auth/login';
+    window.location.pathname = unProtectedUrls[0];
     return <Skeleton height={40} count={5} />;
-  } else if (isAuthenticated && window.location.pathname == '/auth/login') {
+  } else if (
+    isAuthenticated &&
+    unProtectedUrls.indexOf(window.location.pathname) > -1
+  ) {
     window.location.pathname = '/';
     return <Skeleton height={40} count={5} />;
   }
