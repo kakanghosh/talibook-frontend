@@ -1,7 +1,8 @@
+import { AxiosError } from 'axios';
+import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import client from '../../../api/restClient';
-import { useAuth } from '../../../contexts/auth';
 import { Distributor } from '../../../models';
 import {
   populateDistributorList,
@@ -10,14 +11,20 @@ import {
 
 const useShowDistributor = () => {
   const dispatch = useDispatch();
-  const { token } = useAuth();
   const distributors = useSelector(selectDistributors);
+  const router = useRouter();
 
   useEffect(() => {
     async function fetchDistributors() {
-      client.defaults.headers.Authorization = `Bearer ${token}`;
-      const { data } = await client.get<Distributor[]>('api/v1/distributors');
-      dispatch(populateDistributorList(data));
+      try {
+        const { data } = await client.get<Distributor[]>('api/v1/distributors');
+        dispatch(populateDistributorList(data));
+      } catch (error) {
+        const { response } = error as AxiosError;
+        if (response.status == 422) {
+          router.push('/404');
+        }
+      }
     }
     fetchDistributors();
   }, []);

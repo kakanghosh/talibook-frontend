@@ -29,6 +29,7 @@ export const AuthProvider = ({ children }) => {
         if (isExpired(token)) {
           logout();
         }
+        client.defaults.headers.Authorization = `Bearer ${token}`;
         setToken(token);
         const decode = JSON.parse(userFromCookie);
         setUser(decode);
