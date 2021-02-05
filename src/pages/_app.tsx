@@ -5,12 +5,12 @@ import Head from 'next/head';
 import './styles.css';
 import store from '../store/store';
 import { APP } from '../common/constants';
-import { ChakraProvider } from '@chakra-ui/react';
 import { AuthProvider, ProtectedRoute } from '../contexts/auth';
 import Moment from 'react-moment';
 import 'moment-timezone';
 import moment from 'moment';
 import '../i18n/settings';
+import 'antd/dist/antd.css';
 
 Moment.globalMoment = moment;
 Moment.globalTimezone = 'Asia/Dhaka';
@@ -27,11 +27,9 @@ function CustomApp({ Component, pageProps }: AppProps) {
         <main>
           <Provider store={store}>
             <AuthProvider>
-              <ChakraProvider>
-                <ProtectedRoute>
-                  <Component {...pageProps} />
-                </ProtectedRoute>
-              </ChakraProvider>
+              <ProtectedRoute>
+                <Component {...pageProps} />
+              </ProtectedRoute>
             </AuthProvider>
           </Provider>
         </main>

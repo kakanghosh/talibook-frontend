@@ -18,6 +18,7 @@ export default {
   Distributor_Created_Successfully: 'Distributor Created Successfully',
 
   Email_Address: 'Email Address',
+  Email_Password_Incorrct: 'Email password incorrect',
 
   First_Name: 'First Name',
 

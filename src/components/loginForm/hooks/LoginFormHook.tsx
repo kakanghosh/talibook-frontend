@@ -1,10 +1,8 @@
-import { useToast } from '@chakra-ui/react';
 import { useFormik } from 'formik';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { SchemaOf, object, string } from 'yup';
 import { useAuth } from '../../../contexts/auth';
-import keys from '../../../i18n/translations/keys';
 
 type LoginData = {
   email: string;
@@ -18,16 +16,18 @@ const validationSchema: SchemaOf<LoginData> = object({
     .required('Email is required'),
   password: string().trim().required('Password is required'),
 });
+interface Props {
+  onSuccess: () => void;
+}
 
-function useLoginForm() {
+function useLoginForm(props: Props) {
   const { login, setUser } = useAuth();
   const [showPlainPassword, setShowPlainPassword] = useState(false);
   const [loginFailed, setLoginFailed] = useState(false);
-  const toast = useToast();
   const { t } = useTranslation();
   const [tryingToLogin, setTryingToLogin] = useState(false);
 
-  const loginForm = useFormik<LoginData>({
+  const form = useFormik<LoginData>({
     initialValues: {
       email: '',
       password: '',
@@ -38,7 +38,7 @@ function useLoginForm() {
         setTryingToLogin(true);
         setLoginFailed(false);
         const user = await login(values.email, values.password);
-        showToast();
+        props.onSuccess();
         setTimeout(() => {
           setUser(user);
           window.location.pathname = '/';
@@ -57,25 +57,15 @@ function useLoginForm() {
     setShowPlainPassword(!showPlainPassword);
   }
 
-  const { errors, touched } = loginForm;
+  const { errors, touched } = form;
 
-  const isFormValid =
+  const isFormInvalid =
     Object.keys(errors).length > 0 || Object.keys(touched).length == 0;
-
-  const showToast = () =>
-    toast({
-      title: t(keys.Login_Succesful),
-      description: t(keys.Redirecting_You_To_Dashboard),
-      status: 'success',
-      duration: 9000,
-      isClosable: true,
-      position: 'bottom-right',
-    });
 
   return {
     showPlainPassword,
-    loginForm,
-    isFormValid,
+    form,
+    isFormInvalid,
     loginFailed,
     tryingToLogin,
     updateShowPlainPassword,

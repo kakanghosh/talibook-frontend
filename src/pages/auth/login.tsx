@@ -1,4 +1,4 @@
-import LoginView from '../../features/loginView/LoginView';
+import LoginView from '../../features/login/LoginView';
 
 const LoginPage = () => {
   return <LoginView></LoginView>;

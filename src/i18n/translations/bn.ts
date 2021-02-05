@@ -19,6 +19,7 @@ export default {
   [keys.Distributor_Created_Successfully]: 'বিতরণকারী সফল ভাবে তৈরি হয়েছে',
 
   [keys.Email_Address]: 'ইমেইল এড্রেস',
+  [keys.Email_Password_Incorrct]: 'ইমেইল / পাসওয়ার্ড ভুল হয়েছে',
 
   [keys.First_Name]: 'নাম',
 

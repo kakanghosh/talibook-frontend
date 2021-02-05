@@ -1,14 +1,7 @@
-import { Stack } from '@chakra-ui/react';
-import Navbar from '../components/navbar/Navbar';
-import DashBoardView from '../features/dashboardView/DashBoardView';
+import DashBoardView from '../features/dashboard/DashBoardView';
 
 function Index() {
-  return (
-    <Stack wrap='wrap'>
-      <Navbar></Navbar>
-      <DashBoardView></DashBoardView>
-    </Stack>
-  );
+  return <DashBoardView></DashBoardView>;
 }
 
 export default Index;

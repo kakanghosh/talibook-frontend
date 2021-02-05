@@ -1,10 +1,7 @@
-import { useToast } from '@chakra-ui/react';
 import { useFormik } from 'formik';
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { SchemaOf, object, string, ref } from 'yup';
 import client from '../../../api/restClient';
-import keys from '../../../i18n/translations/keys';
 import { User } from '../../../models';
 
 type CreateAccountData = {
@@ -29,14 +26,17 @@ const validationSchema: SchemaOf<CreateAccountData> = object().shape({
     .oneOf([ref('password')], 'Password must be matched'),
 });
 
-function useCreateAccountForm() {
+interface Props {
+  onSuccess: () => void;
+}
+
+function useCreateAccountForm(props: Props) {
   const [plainPassword, setPlainPassword] = useState(false);
   const [plainRepassword, setPlainRepassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
-  const toast = useToast();
-  const { t } = useTranslation();
+  const [submitForm, setSubmitForm] = useState(false);
 
-  const createAccountForm = useFormik<CreateAccountData>({
+  const form = useFormik<CreateAccountData>({
     initialValues: {
       firstName: '',
       lastName: '',
@@ -47,14 +47,17 @@ function useCreateAccountForm() {
     validationSchema,
     onSubmit: async (values) => {
       const { repassword, ...payload } = values;
+      setSubmitForm(true);
       try {
         setErrorMessage(null);
         await client.post<User>('api/v1/users', payload);
-        showToast();
+        props.onSuccess();
         setTimeout(() => {
+          setSubmitForm(false);
           window.location.pathname = '/auth/login';
         }, 2000);
       } catch ({ response }) {
+        setSubmitForm(false);
         if (response.data.statusCode == 422) {
           setErrorMessage(response.data.message);
         }
@@ -70,27 +73,18 @@ function useCreateAccountForm() {
     setPlainRepassword(!plainRepassword);
   }
 
-  const { errors, touched } = createAccountForm;
+  const { errors, touched } = form;
 
-  const isFormValid =
+  const isFormInValid =
     Object.keys(errors).length > 0 || Object.keys(touched).length == 0;
-
-  const showToast = () =>
-    toast({
-      title: t(keys.Account_Creation_Successful),
-      description: t(keys.Redirecting_To_Login_Page),
-      status: 'success',
-      duration: 9000,
-      isClosable: true,
-      position: 'bottom-right',
-    });
 
   return {
     plainPassword,
     plainRepassword,
-    createAccountForm,
-    isFormValid,
+    form,
+    isFormInValid,
     errorMessage,
+    submitForm,
     togglePlainPassword,
     togglePlainRePassword,
   };
