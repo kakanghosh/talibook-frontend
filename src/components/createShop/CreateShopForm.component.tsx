@@ -14,7 +14,7 @@ interface Props {
 const CreateShopForm = (props: Props) => {
   const [form] = Form.useForm();
   const { t } = useTranslation();
-  const { form: createDistributorForm, errorMessage } = useCreateShop({
+  const { form: createDistributorForm, isFormSubmitted } = useCreateShop({
     distributorId: props.distributorId,
     onCancel: cancelhandler,
   });
@@ -50,6 +50,7 @@ const CreateShopForm = (props: Props) => {
             type='primary'
             disabled={!(isValid && dirty)}
             htmlType='submit'
+            loading={isFormSubmitted}
           >
             {t(keys.Create_Shop)}
           </Button>

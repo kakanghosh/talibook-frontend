@@ -24,7 +24,7 @@ interface Props {
 function useCreateShop(props: Props) {
   const [errorMessage, setErrorMessage] = useState(null);
   const dispatch = useDispatch();
-  const { t } = useTranslation();
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
   const form = useFormik<CreateShopData>({
     initialValues: {
@@ -33,6 +33,7 @@ function useCreateShop(props: Props) {
     validationSchema,
     onSubmit: async (values) => {
       try {
+        setIsFormSubmitted(true);
         setErrorMessage(null);
         const { data } = await client.post<Shop>(
           `api/v1/distributors/${props.distributorId}/shops`,
@@ -48,7 +49,9 @@ function useCreateShop(props: Props) {
         if (props.onCancel) {
           props.onCancel();
         }
+        setIsFormSubmitted(false);
       } catch ({ response }) {
+        setIsFormSubmitted(false);
         if (response.data.statusCode == 422) {
           setErrorMessage(response.data.message);
         }
@@ -59,6 +62,7 @@ function useCreateShop(props: Props) {
   return {
     form,
     errorMessage,
+    isFormSubmitted,
   };
 }
 

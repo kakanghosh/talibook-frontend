@@ -18,7 +18,7 @@ interface Props {
 const CreateTransactionForm = (props: Props) => {
   const [form] = Form.useForm();
   const { t } = useTranslation();
-  const { form: trnasactionForm, errorMessage } = useCreateTransaction({
+  const { form: trnasactionForm, isFormSubmitted } = useCreateTransaction({
     distributorId: props.distributorId,
     shopId: props.shopId,
     onClose: cancelhandler,
@@ -70,6 +70,7 @@ const CreateTransactionForm = (props: Props) => {
             type='primary'
             disabled={!(isValid && dirty)}
             htmlType='submit'
+            loading={isFormSubmitted}
           >
             {t(keys.Create_Transaction)}
           </Button>

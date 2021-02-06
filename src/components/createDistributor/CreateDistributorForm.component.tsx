@@ -13,9 +13,11 @@ interface Props {
 const CreateDistributorForm = (props: Props) => {
   const [form] = Form.useForm();
   const { t } = useTranslation();
-  const { form: createDistributorForm, errorMessage } = useCreateDistributor({
-    onClose: cancelhandler,
-  });
+  const { form: createDistributorForm, isFormSubmitted } = useCreateDistributor(
+    {
+      onClose: cancelhandler,
+    }
+  );
 
   const {
     values,
@@ -53,7 +55,12 @@ const CreateDistributorForm = (props: Props) => {
           </Button>
         </Form.Item>
         <Form.Item>
-          <Button type='primary' onClick={cancelhandler} danger>
+          <Button
+            type='primary'
+            onClick={cancelhandler}
+            danger
+            loading={isFormSubmitted}
+          >
             {t(keys.Cancel)}
           </Button>
         </Form.Item>

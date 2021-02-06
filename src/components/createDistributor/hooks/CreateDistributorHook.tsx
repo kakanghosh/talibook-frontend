@@ -23,6 +23,7 @@ interface Props {
 function useCreateDistributor(props: Props) {
   const [errorMessage, setErrorMessage] = useState(null);
   const dispatch = useDispatch();
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
   const form = useFormik<CreateDistributorData>({
     initialValues: {
@@ -31,6 +32,7 @@ function useCreateDistributor(props: Props) {
     validationSchema,
     onSubmit: async (values) => {
       try {
+        setIsFormSubmitted(true);
         setErrorMessage(null);
         const { data } = await client.post<Distributor>(
           'api/v1/distributors',
@@ -40,7 +42,9 @@ function useCreateDistributor(props: Props) {
         if (props.onClose) {
           props.onClose();
         }
+        setIsFormSubmitted(false);
       } catch ({ response }) {
+        setIsFormSubmitted(false);
         if (response.data.statusCode == 422) {
           setErrorMessage(response.data.message);
         }
@@ -51,6 +55,7 @@ function useCreateDistributor(props: Props) {
   return {
     form,
     errorMessage,
+    isFormSubmitted,
   };
 }
 

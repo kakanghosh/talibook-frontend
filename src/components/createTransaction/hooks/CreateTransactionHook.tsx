@@ -26,7 +26,7 @@ interface Props {
 function useCreateTransaction(props: Props) {
   const [errorMessage, setErrorMessage] = useState(null);
   const dispatch = useDispatch();
-  const { t } = useTranslation();
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
   const form = useFormik<CreateShopData>({
     initialValues: {
@@ -37,6 +37,7 @@ function useCreateTransaction(props: Props) {
     onSubmit: async (values) => {
       values.type = +values.type;
       try {
+        setIsFormSubmitted(true);
         setErrorMessage(null);
         const { data } = await client.post<NewTransaction>(
           `api/v1/distributors/${props.distributorId}/shops/${props.shopId}/transactions`,
@@ -49,10 +50,12 @@ function useCreateTransaction(props: Props) {
             transactionData: data,
           })
         );
+        setIsFormSubmitted(false);
         if (props.onClose) {
           props.onClose();
         }
       } catch ({ response }) {
+        setIsFormSubmitted(false);
         if (response.data.statusCode == 422) {
           setErrorMessage(response.data.message);
         }
@@ -63,6 +66,7 @@ function useCreateTransaction(props: Props) {
   return {
     form,
     errorMessage,
+    isFormSubmitted,
   };
 }
 
