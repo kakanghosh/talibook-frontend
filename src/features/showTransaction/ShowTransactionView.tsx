@@ -35,7 +35,16 @@ const ShowTransactionView = ({ distributorId, shopId }) => {
             {t(keys.Shop_Name)}: {shop?.name}
           </Title>
         </Col>
-        <Col offset={breakPoints.xs ? 1 : 7} sm={2} xs={22}>
+        <Col
+          style={{
+            marginTop: breakPoints.xs ? '2vh' : 0,
+            display: 'flex',
+            justifyContent: breakPoints.xs ? 'flex-start' : 'flex-end',
+          }}
+          offset={breakPoints.xs ? 1 : 2}
+          sm={10}
+          xs={22}
+        >
           <Button
             type='primary'
             icon={<PlusOutlined />}
