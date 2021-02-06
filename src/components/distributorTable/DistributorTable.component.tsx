@@ -19,7 +19,7 @@ const DistributorTable = () => {
       title: t(keys.Date),
       key: 'createdAt',
       dataIndex: 'createdAt',
-      render: (data: Distributor) => <Moment date={data.createdAt} />,
+      render: (date) => <Moment date={date} />,
     },
     {
       title: '',

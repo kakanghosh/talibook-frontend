@@ -39,7 +39,7 @@ const TransactionsTable = (props: Props) => {
       title: t(keys.Date),
       key: 'createdAt',
       dataIndex: 'createdAt',
-      render: (data: Transaction) => <Moment date={data.createdAt} />,
+      render: (date) => <Moment date={date} />,
     },
     {
       title: t(keys.Amount),
