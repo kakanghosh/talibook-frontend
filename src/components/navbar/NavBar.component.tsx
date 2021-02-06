@@ -9,18 +9,21 @@ import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../contexts/auth';
 import keys from '../../i18n/translations/keys';
 import NextLink from 'next/link';
+import Grid from 'antd/lib/grid';
 
 const { Header } = Layout;
 const { Title } = Typography;
+const { useBreakpoint } = Grid;
 
 const NavBar = () => {
   const { t } = useTranslation();
   const { user, logout } = useAuth();
   const avatarKeyword = `${user.firstName[0]}${user.lastName[0]}`;
+  const screens = useBreakpoint();
 
   return (
     <Layout className='layout'>
-      <Header>
+      <Header style={{ padding: screens.xs ? '0 20px' : '0 40px' }}>
         <Row style={{ height: '100%' }} align='middle'>
           <Col xs={12}>
             <Title style={{ color: 'white', marginBottom: '0' }} level={2}>
