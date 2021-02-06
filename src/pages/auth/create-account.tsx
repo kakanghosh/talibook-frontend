@@ -1,4 +1,4 @@
-import CreateAccountView from '../../features/createAccountView';
+import CreateAccountView from '../../features/createAccount/CreateAccountView';
 
 const CreateAccountPage = () => {
   return <CreateAccountView></CreateAccountView>;

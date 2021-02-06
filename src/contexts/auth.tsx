@@ -3,10 +3,11 @@ import Cookies from 'js-cookie';
 import client from '../api/restClient';
 import Skeleton from 'react-loading-skeleton';
 import { decodeToken, isExpired } from 'react-jwt';
+import { User } from '../models';
 
 interface IAuth {
   isAuthenticated: boolean;
-  user: any;
+  user: User;
   isLoading: boolean;
   login: (email: string, password: string) => Promise<any>;
   logout: () => void;
@@ -23,6 +24,8 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     async function loadUserFromCookie() {
+      console.log('Booted AuthProvider');
+
       const token = Cookies.get('token');
       const userFromCookie = Cookies.get('user');
       if (token && userFromCookie) {
@@ -92,6 +95,10 @@ export const useAuth = () => useContext(AuthContext);
 export const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, isLoading } = useAuth();
   const [unProtectedUrls] = useState(['/auth/login', '/auth/create-account']);
+
+  useEffect(() => {
+    console.log('Booted ProtectedRoute');
+  }, []);
 
   if (isLoading) {
     return <Skeleton height={40} count={5} />;

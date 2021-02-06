@@ -5,6 +5,8 @@ export default {
   [keys.Add_Transaction]: 'লেনদেন যোগ করুন',
   [keys.Account_Creation_Successful]: 'একাউন্ট সফল ভাবে তৈরি হয়েছে',
 
+  [keys.Back_To_Home]: 'হোম পেইজে ফিরত যান',
+
   [keys.Create_New_Account]: 'নতুন একাউন্ট তৈরি করুন?',
   [keys.Create_Account]: 'একাউন্ট তৈরি করুন',
   [keys.Create_Distributor]: 'বিতরণকারী তৈরি করুন',
@@ -19,6 +21,7 @@ export default {
   [keys.Distributor_Created_Successfully]: 'বিতরণকারী সফল ভাবে তৈরি হয়েছে',
 
   [keys.Email_Address]: 'ইমেইল এড্রেস',
+  [keys.Email_Password_Incorrct]: 'ইমেইল / পাসওয়ার্ড ভুল হয়েছে',
 
   [keys.First_Name]: 'নাম',
 
@@ -34,6 +37,8 @@ export default {
   [keys.Password]: 'পাসওয়ার্ড',
   [keys.Purchase]: 'ক্রয়',
   [keys.Please_Wait]: 'অনুগ্রহপূর্বক অপেক্ষা করুন',
+  [keys.Page_Not_Found]:
+    'দুঃখিত, আপনি যে পৃষ্ঠাটি পরিদর্শন করেছেন তা বিদ্যমান নেই।',
 
   [keys.Re_Password]: 'পুনারায় পাসওয়ার্ড',
   [keys.Redirecting_You_To_Dashboard]: 'আমরা আপনাকে ড্যাসবোর্ডে নিয়ে যাচ্ছি',

@@ -1,7 +1,11 @@
-import LoginView from '../../features/loginView/LoginView';
+import LoginView from '../../features/login/LoginView';
 
 const LoginPage = () => {
-  return <LoginView></LoginView>;
+  return (
+    <div>
+      <LoginView></LoginView>
+    </div>
+  );
 };
 
 export default LoginPage;

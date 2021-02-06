@@ -1,6 +1,7 @@
 import { CaseReducer, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
   NewTransaction,
+  NewTransactionState,
   ShopTransaction,
   TransactionSliceState,
 } from '../../models';
@@ -26,6 +27,32 @@ const updateTransactionHistoryInShopSlice: CaseReducer<
   }
 };
 
+const deleteTransactionHistoryInShopSlice: CaseReducer<
+  TransactionSliceState,
+  PayloadAction<{
+    shopId: number;
+    transactionId: number;
+    newTransactionState: NewTransactionState;
+  }>
+> = (state, action) => {
+  const {
+    shopId,
+    transactionId,
+    newTransactionState: { totalPurchase, totalDeposite },
+  } = action.payload;
+  const shopTransaction = state.shopsTransaction.find(
+    (st) => st.shopId === shopId
+  );
+  if (shopTransaction) {
+    const { transactions } = shopTransaction.transactionData;
+    shopTransaction.transactionData.transactions = transactions.filter(
+      (trans) => trans.id !== transactionId
+    );
+    shopTransaction.transactionData.totalPurchase = totalPurchase;
+    shopTransaction.transactionData.totalDeposite = totalDeposite;
+  }
+};
+
 const populateTransactionOfShopSlice: CaseReducer<
   TransactionSliceState,
   PayloadAction<ShopTransaction>
@@ -39,12 +66,14 @@ export const transactionSlice = createSlice({
   reducers: {
     populateTransactionOfShop: populateTransactionOfShopSlice,
     updateTransactionHistoryInShop: updateTransactionHistoryInShopSlice,
+    deleteTransactionHistoryInShop: deleteTransactionHistoryInShopSlice,
   },
 });
 
 export const {
   populateTransactionOfShop,
   updateTransactionHistoryInShop,
+  deleteTransactionHistoryInShop,
 } = transactionSlice.actions;
 
 export const selectTransactionByShopId = (shopId: number) => ({

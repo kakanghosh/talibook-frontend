@@ -1,4 +1,3 @@
-import { useToast } from '@chakra-ui/react';
 import { useFormik } from 'formik';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -17,11 +16,13 @@ const validationSchema: SchemaOf<CreateDistributorData> = object().shape({
   name: string().trim().required('Name is required'),
 });
 
-function useCreateDistributor(onClose: () => void) {
+interface Props {
+  onClose?: () => void;
+}
+
+function useCreateDistributor(props: Props) {
   const [errorMessage, setErrorMessage] = useState(null);
-  const toast = useToast();
   const dispatch = useDispatch();
-  const { t } = useTranslation();
 
   const form = useFormik<CreateDistributorData>({
     initialValues: {
@@ -36,9 +37,8 @@ function useCreateDistributor(onClose: () => void) {
           values
         );
         dispatch(addToDistributorList(data));
-        showToast();
-        if (onClose) {
-          onClose();
+        if (props.onClose) {
+          props.onClose();
         }
       } catch ({ response }) {
         if (response.data.statusCode == 422) {
@@ -48,23 +48,8 @@ function useCreateDistributor(onClose: () => void) {
     },
   });
 
-  const showToast = () =>
-    toast({
-      title: t(keys.Distributor_Created_Successfully),
-      status: 'success',
-      duration: 3000,
-      isClosable: true,
-      position: 'bottom-right',
-    });
-
-  const { errors, touched } = form;
-
-  const isFormInvalid =
-    Object.keys(errors).length > 0 || Object.keys(touched).length == 0;
-
   return {
     form,
-    isFormInvalid,
     errorMessage,
   };
 }

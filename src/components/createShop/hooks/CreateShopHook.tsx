@@ -1,4 +1,3 @@
-import { useToast } from '@chakra-ui/react';
 import { useFormik } from 'formik';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -17,9 +16,13 @@ const validationSchema: SchemaOf<CreateShopData> = object().shape({
   name: string().trim().required('Name is required'),
 });
 
-function useCreateShop(distributorId: number, onClose: () => void) {
+interface Props {
+  distributorId: number;
+  onCancel?: () => void;
+}
+
+function useCreateShop(props: Props) {
   const [errorMessage, setErrorMessage] = useState(null);
-  const toast = useToast();
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
@@ -32,19 +35,18 @@ function useCreateShop(distributorId: number, onClose: () => void) {
       try {
         setErrorMessage(null);
         const { data } = await client.post<Shop>(
-          `api/v1/distributors/${distributorId}/shops`,
+          `api/v1/distributors/${props.distributorId}/shops`,
           values
         );
         form.resetForm();
         dispatch(
           addShopInDistributor({
-            distributorId,
+            distributorId: props.distributorId,
             shop: data,
           })
         );
-        showToast();
-        if (onClose) {
-          onClose();
+        if (props.onCancel) {
+          props.onCancel();
         }
       } catch ({ response }) {
         if (response.data.statusCode == 422) {
@@ -54,23 +56,8 @@ function useCreateShop(distributorId: number, onClose: () => void) {
     },
   });
 
-  const showToast = () =>
-    toast({
-      title: t(keys.Shop_Created_Successfully),
-      status: 'success',
-      duration: 3000,
-      isClosable: true,
-      position: 'bottom-right',
-    });
-
-  const { errors, touched } = form;
-
-  const isFormInvalid =
-    Object.keys(errors).length > 0 || Object.keys(touched).length == 0;
-
   return {
     form,
-    isFormInvalid,
     errorMessage,
   };
 }
