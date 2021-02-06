@@ -44,7 +44,11 @@ const LoginForm = () => {
   }
 
   return (
-    <Row justify='center' align='middle' style={{ height: '100vh' }}>
+    <Row
+      justify='center'
+      align='middle'
+      style={{ height: '100vh', marginLeft: '5vw', marginRight: '5vw' }}
+    >
       <Col xs={24} md={10}>
         {loginFailed && (
           <Alert

@@ -4,6 +4,8 @@ export default {
   Add_Transaction: 'Add Transaction',
   Account_Creation_Successful: 'Account Creation Successful',
 
+  Back_To_Home: 'Back to home',
+
   Create_New_Account: 'Create New Account',
   Create_Account: 'Create Accound',
   Create_Distributor: 'Create Distributor',
@@ -34,6 +36,7 @@ export default {
   Password: 'Password',
   Purchase: 'Purchase',
   Please_Wait: 'Please Wait',
+  Page_Not_Found: 'Page not found',
 
   Re_Password: 'Re Password',
   Redirecting_You_To_Dashboard: 'Redirecting you to Dashboard',

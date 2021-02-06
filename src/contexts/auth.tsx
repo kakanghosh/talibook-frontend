@@ -3,10 +3,11 @@ import Cookies from 'js-cookie';
 import client from '../api/restClient';
 import Skeleton from 'react-loading-skeleton';
 import { decodeToken, isExpired } from 'react-jwt';
+import { User } from '../models';
 
 interface IAuth {
   isAuthenticated: boolean;
-  user: any;
+  user: User;
   isLoading: boolean;
   login: (email: string, password: string) => Promise<any>;
   logout: () => void;

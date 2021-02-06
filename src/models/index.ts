@@ -35,9 +35,12 @@ export class Audit {
 }
 
 export class User extends Audit {
+  id: number;
   firstName: string;
   lastName: string;
   email: string;
+  createdAt: Date;
+  deletedAt: Date;
 }
 
 export class Shop extends Audit {
@@ -65,4 +68,9 @@ export class TransactionData {
   totalDeposite: number;
   totalPurchase: number;
   transactions: Transaction[];
+}
+
+export class NewTransactionState {
+  totalDeposite: number;
+  totalPurchase: number;
 }
