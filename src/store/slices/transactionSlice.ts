@@ -23,7 +23,7 @@ const updateTransactionHistoryInShopSlice: CaseReducer<
     const { transactionData: transactionDataFromStore } = shopTransaction;
     transactionDataFromStore.totalDeposite = transactionData.totalDeposite;
     transactionDataFromStore.totalPurchase = transactionData.totalPurchase;
-    transactionDataFromStore.transactions.push(transactionData.transaction);
+    transactionDataFromStore.transactions.unshift(transactionData.transaction);
   }
 };
 

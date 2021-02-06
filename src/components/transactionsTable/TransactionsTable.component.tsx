@@ -81,7 +81,9 @@ const TransactionsTable = (props: Props) => {
           <Popconfirm
             placement='top'
             title={t(keys.Are_You_Sure)}
-            onConfirm={() => deleteTransaction(props.shopId, data.id)}
+            onConfirm={() =>
+              deleteTransaction(props.shopId, data.id, transactionDate)
+            }
             okText={t(keys.Yes)}
             cancelText={t(keys.No)}
           >

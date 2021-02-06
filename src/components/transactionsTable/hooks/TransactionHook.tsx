@@ -30,13 +30,20 @@ const useFetchTransaction = ({ distributorId, shopId, defaultDate }: Props) => {
     filterByMonthOfTheYear(defaultDate);
   }, []);
 
-  async function deleteTransaction(shopId: number, transactionId: number) {
+  async function deleteTransaction(
+    shopId: number,
+    transactionId: number,
+    date: moment.Moment
+  ) {
     try {
+      const queryString = `month=${
+        date.month() + 1
+      }&year=${date.year()}&timeZoneOffset=${new Date().getTimezoneOffset()}`;
       const { data } = await client.delete<{
         totalDeposite: number;
         totalPurchase: number;
       }>(
-        `api/v1/distributors/${distributorId}/shops/${shopId}/transactions/${transactionId}`
+        `api/v1/distributors/${distributorId}/shops/${shopId}/transactions/${transactionId}?${queryString}`
       );
 
       dispatch(
