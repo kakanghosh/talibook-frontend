@@ -6,12 +6,14 @@ import { useTranslation } from 'react-i18next';
 import keys from '../../i18n/translations/keys';
 import { Space } from 'antd';
 import useCreateTransaction from './hooks/CreateTransactionHook';
+import moment from 'moment';
 
 const { Option } = Select;
 
 interface Props {
   distributorId: number;
   shopId: number;
+  transactionDate: moment.Moment;
   onCancel: () => void;
 }
 
@@ -21,6 +23,7 @@ const CreateTransactionForm = (props: Props) => {
   const { form: trnasactionForm, isFormSubmitted } = useCreateTransaction({
     distributorId: props.distributorId,
     shopId: props.shopId,
+    transactionDate: props.transactionDate,
     onClose: cancelhandler,
   });
 

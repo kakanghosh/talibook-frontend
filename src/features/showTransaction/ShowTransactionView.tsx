@@ -13,6 +13,7 @@ import { useState } from 'react';
 import CreateTransactionForm from '../../components/createTransaction/CreateTransactionForm.component';
 import useFetchShop from '../../components/createTransaction/hooks/FetchShopHook';
 import TransactionsTable from '../../components/transactionsTable/TransactionsTable.component';
+import moment from 'moment';
 
 const { Title } = Typography;
 const { useBreakpoint } = Grid;
@@ -22,6 +23,7 @@ const ShowTransactionView = ({ distributorId, shopId }) => {
   const breakPoints = useBreakpoint();
   const [showTransactionForm, setShowTransactionForm] = useState(false);
   const { shop } = useFetchShop(distributorId, shopId);
+  const [transactionDate, setTransactionDate] = useState<moment.Moment>(null);
 
   return (
     <div>
@@ -63,6 +65,7 @@ const ShowTransactionView = ({ distributorId, shopId }) => {
               <CreateTransactionForm
                 distributorId={distributorId}
                 shopId={shopId}
+                transactionDate={transactionDate}
                 onCancel={() => setShowTransactionForm(false)}
               ></CreateTransactionForm>
             </Card>
@@ -72,6 +75,7 @@ const ShowTransactionView = ({ distributorId, shopId }) => {
       <Row style={{ marginTop: '3vh', marginBottom: '1vh' }}>
         <Col offset={1} span={22}>
           <TransactionsTable
+            passTransactionDate={setTransactionDate}
             distributorId={distributorId}
             shopId={shopId}
           ></TransactionsTable>

@@ -13,26 +13,29 @@ import Moment from 'react-moment';
 import useFetchTransaction from './hooks/TransactionHook';
 import TransactionState from '../transactionStat/TransactionState.component';
 import moment from 'moment';
-import useScreenBreakPoint from '../../hooks/ScreenBreakPointHook';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface Props {
   distributorId: number;
   shopId: number;
+  passTransactionDate: (date: moment.Moment) => void;
 }
 
 const TransactionsTable = (props: Props) => {
-  const [defaultDate] = useState(moment(new Date()));
+  const [transactionDate, setTransactionDate] = useState(moment(new Date()));
   const {
     transaction,
     deleteTransaction,
     filterByMonthOfTheYear,
   } = useFetchTransaction({
     ...props,
-    defaultDate,
+    defaultDate: transactionDate,
   });
   const { t } = useTranslation();
-  const { breakPoints } = useScreenBreakPoint();
+
+  useEffect(() => {
+    props.passTransactionDate(transactionDate);
+  }, []);
 
   const transactionType = (type: number) => {
     switch (type) {
@@ -46,7 +49,11 @@ const TransactionsTable = (props: Props) => {
   };
 
   function onChange(date: moment.Moment, dateString: string) {
-    filterByMonthOfTheYear(date);
+    props.passTransactionDate(date);
+    if (date) {
+      setTransactionDate(date);
+      filterByMonthOfTheYear(date);
+    }
   }
 
   const columns = [
@@ -100,7 +107,7 @@ const TransactionsTable = (props: Props) => {
       <Row justify='end'>
         <Col>
           <DatePicker
-            defaultValue={defaultDate}
+            defaultValue={transactionDate}
             format='MM-yyyy'
             onChange={onChange}
             picker='month'
