@@ -3,6 +3,7 @@ export default {
   Already_Have_An_Account: 'Already have an account',
   Add_Transaction: 'Add Transaction',
   Account_Creation_Successful: 'Account Creation Successful',
+  Are_You_Sure: 'Are you sure?',
 
   Back_To_Home: 'Back to home',
 
@@ -32,6 +33,7 @@ export default {
   Logout: 'Logout',
 
   Name: 'Name',
+  No: 'No',
 
   Password: 'Password',
   Purchase: 'Purchase',
@@ -57,4 +59,6 @@ export default {
   Transaction_Created_Successfully: 'Transaction Created Successfully',
 
   Redirecting_To_Login_Page: 'Redirecting To Login Page',
+
+  Yes: 'Yes',
 };

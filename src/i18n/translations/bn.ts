@@ -4,6 +4,7 @@ export default {
   [keys.Already_Have_An_Account]: 'পূর্বেই একাউন্ট আছে?',
   [keys.Add_Transaction]: 'লেনদেন যোগ করুন',
   [keys.Account_Creation_Successful]: 'একাউন্ট সফল ভাবে তৈরি হয়েছে',
+  [keys.Are_You_Sure]: 'আপনি কি নিশ্চিত?',
 
   [keys.Back_To_Home]: 'হোম পেইজে ফিরত যান',
 
@@ -33,6 +34,7 @@ export default {
   [keys.Logout]: 'লগআউট',
 
   [keys.Name]: 'নাম',
+  [keys.No]: 'না',
 
   [keys.Password]: 'পাসওয়ার্ড',
   [keys.Purchase]: 'ক্রয়',
@@ -58,4 +60,6 @@ export default {
   [keys.Amount]: 'পরিমাণ',
   [keys.Type]: 'প্রকার',
   [keys.Transaction_Created_Successfully]: 'লেনদেন সফল ভাবে তৈরি হয়েছে',
+
+  [keys.Yes]: 'হ্যাঁ',
 };

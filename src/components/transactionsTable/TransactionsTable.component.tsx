@@ -3,7 +3,8 @@ import Button from 'antd/lib/button';
 import Tag from 'antd/lib/tag';
 import Row from 'antd/lib/row';
 import Col from 'antd/lib/col';
-import { DeleteFilled, DeleteOutlined } from '@ant-design/icons';
+import Popconfirm from 'antd/lib/popconfirm';
+import { DeleteOutlined } from '@ant-design/icons';
 import { Transaction } from '../../models';
 import { useTranslation } from 'react-i18next';
 import keys from '../../i18n/translations/keys';
@@ -53,13 +54,18 @@ const TransactionsTable = (props: Props) => {
       render: (type) => transactionType(type),
     },
     {
+      title: '',
       render: (data: Transaction) => {
         return (
-          <Button
-            type='dashed'
-            icon={<DeleteOutlined />}
-            onClick={() => deleteTransaction(props.shopId, data.id)}
-          />
+          <Popconfirm
+            placement='top'
+            title={t(keys.Are_You_Sure)}
+            onConfirm={() => deleteTransaction(props.shopId, data.id)}
+            okText={t(keys.Yes)}
+            cancelText={t(keys.No)}
+          >
+            <Button type='dashed' icon={<DeleteOutlined />} />
+          </Popconfirm>
         );
       },
     },
