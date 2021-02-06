@@ -57,7 +57,14 @@ const populateTransactionOfShopSlice: CaseReducer<
   TransactionSliceState,
   PayloadAction<ShopTransaction>
 > = (state, action) => {
-  state.shopsTransaction.push(action.payload);
+  const shopTransData = state.shopsTransaction.find(
+    (shopTrans) => shopTrans.shopId === action.payload.shopId
+  );
+  if (shopTransData) {
+    shopTransData.transactionData = action.payload.transactionData;
+  } else {
+    state.shopsTransaction.push(action.payload);
+  }
 };
 
 export const transactionSlice = createSlice({

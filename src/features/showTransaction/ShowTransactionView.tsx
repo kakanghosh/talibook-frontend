@@ -35,7 +35,7 @@ const ShowTransactionView = ({ distributorId, shopId }) => {
             {t(keys.Shop_Name)}: {shop?.name}
           </Title>
         </Col>
-        <Col offset={breakPoints.xs ? 1 : 5} sm={2} xs={22}>
+        <Col offset={breakPoints.xs ? 1 : 7} sm={2} xs={22}>
           <Button
             type='primary'
             icon={<PlusOutlined />}
