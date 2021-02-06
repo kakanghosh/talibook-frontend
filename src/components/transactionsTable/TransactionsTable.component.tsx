@@ -69,10 +69,12 @@ const TransactionsTable = (props: Props) => {
     <>
       <Row style={{ marginBottom: '3vh' }}>
         <Col span={24}>
-          <TransactionState
-            totalDeposite={transaction?.totalDeposite}
-            totalPurchase={transaction?.totalPurchase}
-          ></TransactionState>
+          {transaction && (
+            <TransactionState
+              totalDeposite={transaction.totalDeposite}
+              totalPurchase={transaction.totalPurchase}
+            ></TransactionState>
+          )}
         </Col>
       </Row>
       <Row style={{ marginTop: '3vh' }}>

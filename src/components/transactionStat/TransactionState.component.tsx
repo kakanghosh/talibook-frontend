@@ -1,7 +1,6 @@
 import Col from 'antd/lib/col';
 import Row from 'antd/lib/row';
 import Statistic from 'antd/lib/statistic';
-import { ArrowDownOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import keys from '../../i18n/translations/keys';
 
