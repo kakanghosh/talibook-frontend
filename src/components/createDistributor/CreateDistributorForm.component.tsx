@@ -50,17 +50,13 @@ const CreateDistributorForm = (props: Props) => {
             type='primary'
             disabled={!(isValid && dirty)}
             htmlType='submit'
+            loading={isFormSubmitted}
           >
             {t(keys.Create_Distributor)}
           </Button>
         </Form.Item>
         <Form.Item>
-          <Button
-            type='primary'
-            onClick={cancelhandler}
-            danger
-            loading={isFormSubmitted}
-          >
+          <Button type='primary' onClick={cancelhandler} danger>
             {t(keys.Cancel)}
           </Button>
         </Form.Item>
